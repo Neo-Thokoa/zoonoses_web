@@ -1,0 +1,57 @@
+<div id="quizPage" onload="loadQuestion()">
+  <h1 id="titleHead"> Welcome </h1>
+  <h2 id="questionNumb"></h2>
+  <br>
+  <form hidden action="results.php" method="post">
+		<input type="text" name="mark" id="mark">
+		<input id="sub" type="submit" name="sub" value="submit">
+	</form>
+  <div id="question">
+    <div id="Q1" style="display:none;">
+      <p>
+        What does the acronym PHP stand for?
+      </p>
+      <button type="button" class="btn btn-info" style="width:500px" onclick="wrong()">Personal Home Page</button>
+      <button type="button" class="btn btn-info" style="width:500px" onclick="wrong()">Please Have Patience</button><br/><br/>
+      <button id="A1" type="button" class="btn btn-info" style="width:500px" onclick="right()">PHP: Hypertext Preprocessor</button>
+      <button type="button" class="btn btn-info" style="width:500px" onclick="wrong()">Personal Handy Phone</button>
+    </div>
+    <div id="Q2" style="display:none;">
+      <p>
+        What does the acronym JSON stand for?
+      </p>
+      <button type="button" class="btn btn-info" style="width:500px" onclick="right()">JavaScript Object Notation</button>
+      <button type="button" class="btn btn-info" style="width:500px" onclick="wrong()">JavaScript Object Notion</button><br/><br/>
+      <button id="A1" type="button" class="btn btn-info" style="width:500px" onclick="wrong()">JavaScript On Networks</button>
+      <button type="button" class="btn btn-info" style="width:500px" onclick="wrong()">JavaScript Over Node</button>
+    </div>
+    <div id="Q3" style="display:none;">
+      <p>
+        What does the acronym HTML stand for?
+      </p>
+      <button type="button" class="btn btn-info" style="width:500px" onclick="wrong()">Home Time My Lady</button>
+      <button type="button" class="btn btn-info" style="width:500px" onclick="right()">Hypertext Markup Language</button><br/><br/>
+      <button id="A1" type="button" class="btn btn-info" style="width:500px" onclick="wrong()">Herold Thomas Must Lie</button>
+      <button type="button" class="btn btn-info" style="width:500px" onclick="wrong()">Hey This Man Long?</button>
+    </div>
+    <div id="Q4" style="display:none;">
+      <p>
+        What does the acronym AJAX stand for?
+      </p>
+      <button type="button" class="btn btn-info" style="width:500px" onclick="wrong()">Asymptomatic JavaScript and XML</button>
+      <button type="button" class="btn btn-info" style="width:500px" onclick="wrong()">Around JavaScript and XML</button><br/><br/>
+      <button id="A1" type="button" class="btn btn-info" style="width:500px" onclick="wrong()">And Jack And Xavier</button>
+      <button type="button" class="btn btn-info" style="width:500px" onclick="right()">Asynchronous JavaScript and XML</button>
+    </div>
+    <div id="Q5" style="display:none;">
+      <p>
+        What does the acronym CSS stand for?
+      </p>
+      <button type="button" class="btn btn-info" style="width:500px" onclick="wrong()">Crackers Same Style</button>
+      <button type="button" class="btn btn-info" style="width:500px" onclick="right()">Cascading Style Sheets</button><br/><br/>
+      <button id="A1" type="button" class="btn btn-info" style="width:500px" onclick="wrong()">Clams Slippery Slope</button>
+      <button type="button" class="btn btn-info" style="width:500px" onclick="wrong()">Courage Stand Still!</button>
+    </div>
+  </div>
+
+</div>

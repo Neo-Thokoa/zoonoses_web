@@ -1,0 +1,73 @@
+  <script src="lib/navCtrl.js"></script>
+  <nav class="navbar navbar-inverse navbar-fixed-top" style="opacity: 1; border-bottom: 3px groove white; background-color: #1a1a1a;">
+		<div class="container-fluid">
+		<div class="navbar-header" ng-click="navigate(6)">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar"  >
+				<span class="icon-bar whitebk" ></span>
+				<span class="icon-bar whitebk"></span>
+				<span class="icon-bar whitebk"></span>
+			</button>
+			<a class="navbar-brand"  style="font-family: impact; font-size: 40px;"> Assignment 4 Quiz</a>
+		</div>
+		<div class="collapse navbar-collapse" id="myNavbar">
+			<ul class="nav navbar-nav">
+						<li class="navHeadings" ng-click="navigate(1)"><a class="navHeadColour"><i class="fa fa-book" aria-hidden="true"></i> &nbsp; Bookings &nbsp;</a></li>
+						<li class="navHeadings" ng-click="navigate(2)" ><a class="navHeadColour"> <i class="fa fa-location-arrow" aria-hidden="true"></i> &nbsp; Routes and timetables &nbsp;</a></li>
+		        <li class="navHeadings" ng-click="navigate(3)" ><a class="navHeadColour"> <i class="fa fa-phone" aria-hidden="true"></i>&nbsp; Customer Care &nbsp;</a></li>
+		        <li class="navHeadings" ng-click="navigate(4)"><a  class="navHeadColour"> <i class="fa fa-percent" aria-hidden="true"></i>&nbsp; Promotions &nbsp;</a></li>
+		        <li class="navHeadings" ng-click="navigate(5)"><a  class="navHeadColour"> <i class='fa fa-globe'></i>&nbsp; Travel Info</a></li>
+			</ul>
+		</div>
+	</div>
+  </nav>
+
+  <!-- <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">WebSiteName</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Page 1-1</a></li>
+          <li><a href="#">Page 1-2</a></li>
+          <li><a href="#">Page 1-3</a></li>
+        </ul>
+      </li>
+      <li><a href="#">Page 2</a></li>
+      <li><a href="#">Page 3</a></li>
+    </ul>
+  </div>
+</nav> -->
+
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Assignment 4 Quiz</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active">
+		<a href="../../index.html" class="hidden-xs">Home</a>
+ 		<a href="../../index.html" class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse">Home</a>
+		</li>
+                <li>
+		<a href="#" onclick="restartGame()" class="hidden-xs">Restart Quiz</a>
+		<a href="#" onclick="restartGame()" class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse">Restart Quiz</a>
+		</li>
+		<li>
+		<a href="#overview" onclick="loadLeader()" class="hidden-xs">Leaderboard</a>
+		<a href="#overview" onclick="loadLeader()" class="visible-xs" data-toggle="collapse" data-target=".navbar-collapse">Leaderboard</a>
+		</li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
