@@ -1,43 +1,35 @@
-var transluxModule = angular.module('transluxModule', ['ngRoute','leaflet-directive','oi.select','datepicker', 'ui.rCalendar']);
+var zoonosisModule = angular.module('zoonosisModule', ['ngRoute','leaflet-directive','oi.select','datepicker', 'ui.rCalendar']);
 
-transluxModule.config(["$routeProvider", function($routeProvider) {
+zoonosisModule.config(["$routeProvider", function($routeProvider) {
 
     $routeProvider
    .when("/", {
        templateUrl: "pages/homePage.html",
        controller: "homePageCtrl"
    })
-   .when("/bookings", {
-       templateUrl: "pages/bookings.html",
-       controller: "bookingsCtrl"
+   .when("/dataCollection", {
+       templateUrl: "pages/dataCollection.html",
+       controller: "dataCollectionCtrl"
    })
-   .when("/bookings/:id", {
-       templateUrl: "pages/bookings.html",
-       controller: "bookingsCtrl"
+   .when("/dataCollection/:id", {
+       templateUrl: "pages/dataCollection.html",
+       controller: "dataCollectionCtrl"
    })
-   .when("/customerCare", {
-       templateUrl: "pages/customerCare.html",
-       controller: "customerCareCtrl"
+   .when("/measurements", {
+       templateUrl: "pages/measurements.html",
+       controller: "measurementsCtrl"
    })
    .when("/promotions", {
        templateUrl: "pages/promotions.html",
        controller: "promotionsCtrl"
    })
-   .when("/routesAndTimetables", {
-       templateUrl: "pages/routesAndTimetables.html",
-       controller: "routesAndTimetablesCtrl"
-   })
-   .when("/travelInfo", {
-       templateUrl: "pages/travelInfo.html",
-       controller: "travelInfoCtrl"
+   .when("/findings", {
+       templateUrl: "pages/findings.html",
+       controller: "findingsCtrl"
    })
    .when("/navbar", {
        templateUrl: "pages/navBar.html",
        controller: "navCtrl"
-   })
-   .when("/payments", {
-       templateUrl: "pages/payments.html",
-       controller: "paymentsCtrl"
    })
     .otherwise({
       redirectTo: "/"

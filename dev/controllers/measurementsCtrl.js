@@ -1,11 +1,10 @@
-transluxModule.controller("promotionsCtrl",
+zoonosisModule.controller("customerCareCtrl",
     ["$scope", "$location",
     function ($scope, $location) {
 
-      $scope.Name = "Promotions Page";
+      $scope.Name = "Measurements Page";
 
-            $scope.url = {
-
+       $scope.url = {
         templateUrl: "pages/navBar.html",
         controller: "navCtrl"
         }

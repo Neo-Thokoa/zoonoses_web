@@ -1,5 +1,5 @@
-transluxModule.controller("bookingsCtrl",
-    ["$scope", "$location", "transluxService", "$routeParams",
+zoonosisModule.controller("dataCollectionCtrl",
+    ["$scope", "$location", "zoonosisService", "$routeParams",
     function ($scope, $location, transluxService, $routeParams) {
 
       var id = $routeParams.id;
@@ -12,7 +12,7 @@ transluxModule.controller("bookingsCtrl",
       //$scope.pageName = "Bookings Page";
       $scope.path = './Json/';
 
-      transluxService.getDeparturePoints($scope.path).then(function (results) {
+      zoonosisService.getDeparturePoints($scope.path).then(function (results) {
           //console.log(results.data);
           $scope.departurePoints = results.data;
 

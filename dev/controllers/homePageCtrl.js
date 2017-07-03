@@ -1,4 +1,4 @@
-transluxModule.controller("homePageCtrl",
+zoonosisModule.controller("homePageCtrl",
     ["$scope", "$location",
     function ($scope, $location) {
 
@@ -14,9 +14,9 @@ transluxModule.controller("homePageCtrl",
         controller: "navCtrl"
         }
 
-        $scope.goToBookings = function()
+        $scope.goTodataCollection = function()
         {
-        	$location.path('/bookings');
+        	$location.path('/dataCollection');
         }
 
         $scope.setVar = function(num)

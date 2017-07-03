@@ -1,4 +1,4 @@
-transluxModule.factory('transluxService', ["$http", function ($http) {
+zoonosisModule.factory('zoonosisService', ["$http", function ($http) {
 
     var factoryObj = {};
 
