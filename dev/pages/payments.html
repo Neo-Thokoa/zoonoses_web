@@ -1,0 +1,133 @@
+<div ng-include="url.templateUrl" style="display:inline;"></div>
+<br/>
+<br/>
+<br/>
+
+<div ng-show="show == 1">
+
+  <h1 style="color:black;">Payment</h1>
+  <br />
+
+  <div class="row">
+    <div class="col-sm-1">
+    </div>
+    <div class="col-sm-2">
+      <label>ID/ Passport/ DOB</label>
+    </div>
+    <div class="col-sm-8">
+      <input class="form-control" type="date" model="dob"/>
+    </div>
+    <div class="col-sm-1">
+    </div>
+  </div>
+  <br />
+
+  <div class="row">
+    <div class="col-sm-1">
+    </div>
+    <div class="col-sm-2">
+      <label>Surname</label>
+    </div>
+    <div class="col-sm-8">
+      <input class="form-control" type="text" model="Surname" placeholder="Surname"/>
+    </div>
+    <div class="col-sm-1">
+    </div>
+  </div>
+  <br />
+
+  <div class="row">
+    <div class="col-sm-1">
+    </div>
+    <div class="col-sm-2">
+      <label>Title</label>
+    </div>
+    <div class="col-sm-8">
+      <oi-select style="text-align:left" oi-options="x.name for x in titles" ng-model="title" placeholder="Click to select title" ng-change="setDestinationPoints()">
+      </oi-select>
+    </div>
+    <div class="col-sm-1">
+    </div>
+  </div>
+  <br />
+
+  <div class="row">
+    <div class="col-sm-1">
+    </div>
+    <div class="col-sm-2">
+      <label>Initials</label>
+    </div>
+    <div class="col-sm-8">
+      <input class="form-control" type="text" model="Initials" placeholder="Initials"/>
+    </div>
+    <div class="col-sm-1">
+    </div>
+  </div>
+  <br />
+
+  <div class="row">
+    <div class="col-sm-1">
+    </div>
+    <div class="col-sm-2">
+      <label>Cell No</label>
+    </div>
+    <div class="col-sm-8">
+      <input class="form-control" type="number" model="Initials" placeholder="123456789"/>
+    </div>
+    <div class="col-sm-1">
+    </div>
+  </div>
+  <br />
+
+  <div class="row">
+    <div class="col-sm-1">
+    </div>
+    <div class="col-sm-2">
+      <label>Discount</label>
+    </div>
+    <div class="col-sm-8">
+      <oi-select style="text-align:left" oi-options="x.name for x in discount" ng-model="disc" placeholder="Click to select discount" ng-change="setDestinationPoints()">
+      </oi-select>
+    </div>
+    <div class="col-sm-1">
+    </div>
+  </div>
+  <br />
+
+  <div class="row">
+    <div class="col-sm-1">
+    </div>
+    <div class="col-sm-2">
+      <label>Discount</label>
+    </div>
+    <div class="col-sm-8">
+      <oi-select style="text-align:left" oi-options="x.name for x in bank" ng-model="ban" placeholder="Click to select bank" ng-change="setDestinationPoints()">
+      </oi-select>
+    </div>
+    <div class="col-sm-1">
+    </div>
+  </div>
+  <br />
+
+  <center>
+    <button class="w3-btn w3-red" ng-click="setShow(2)">Submit</button>
+  </center>
+
+
+</div class="row">
+  <div class="col-sm-1">
+  </div>
+  <div ng-show="show == 2" class="col-sm-10">
+    <h1 style="color:black;">Payment</h1>
+    <br />
+    <p style="margin:auto; text-align:center; background-color:wheat; padding:50px">
+      An email will be sent to you with the relevant information about your booking along with payment instructions based on the banking institution you selected.
+    </p>
+    <br />
+    <center>
+      <button class="w3-btn w3-red" ng-click="goHome()">Home</button>
+    </center>
+  </div>
+  <div class="col-sm-1">
+  </div>
+</div>

@@ -1,0 +1,50 @@
+[
+    {
+      "Id": 1,
+      "name": "Sibasa Station",
+      "lat" : -22.932497,
+      "lng": 30.467446 
+    },
+    {
+      "Id": 2,
+      "name": "Polokwane Station",
+       "lat": -23.8961708,
+       "lng": 29.4486263
+    },
+    {
+      "Id": 3,
+      "name": "Bosman Station, Pretoria",
+      "lat" : -25.745536,
+      "lng": 28.185559
+    },
+    {
+      "Id": 4,
+      "name": "Park Station, Johannesburg",
+      "lat": -26.195246,
+      "lng": 28.034088
+    },
+    {
+      "Id": 5,
+      "name": "Durban Central Station",
+       "lat": -29.839285,
+       "lng": 31.024377
+    },
+    {
+      "Id": 6,
+      "name": "Bloemfontein Station",
+      "lat": -29.13184,
+      "lng": 26.195021
+    },
+    {
+      "Id": 7,
+      "name": "Port Elizabeth Station",
+       "lat": -33.958056,
+      "lng": 25.6
+    },
+    {
+      "Id": 8,
+      "name": "Cape Town Station",
+        "lat": -33.918861,
+        "lng": 18.423300
+    }
+]

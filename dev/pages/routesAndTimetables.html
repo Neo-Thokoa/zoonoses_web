@@ -1,0 +1,37 @@
+<div ng-include="url.templateUrl" style="display:inline;"></div>
+<br/>
+<br/>
+<br/>
+<div class="w3-display-container">
+<div class="row" style="padding-right: 20px; padding-left: 20px">
+
+	<div class="col-md-6">
+	  		<leaflet center="SouthAfrica" event-broadcast="events"  paths="paths" markers="markers" maxbounds="maxbounds" defaults="defaults" height="450px"></leaflet>
+	</div>
+	<div  class="col-md-6">
+
+	<div class="w3-display-container w3-red" style="height: 70px;">
+	<div class="" style="text-align: center;padding-top: 12px">
+		Select your desired route by clicking on the green path on the map or manualy selecting your destination points.
+	 </div>
+	</div>
+
+		       <div class="inputArea">
+	                        <label>Destination A</label>
+	                        <oi-select class="inputs" style="text-align:left" ng-change="checkValidate()" oi-options="x.name for x in departurePoints" ng-model="pointA" placeholder="Click to select point A">
+	                        </oi-select>                        
+	             </div>
+	             <div class="inputArea">
+	                        <label>Destination B</label>
+	                        <oi-select class="inputs" style="text-align:left" ng-change="checkValidate()" oi-options="x.name for x in departurePoints" ng-model="pointB" placeholder="Click to select point B">
+	                        </oi-select>                        
+	             </div>
+	             <p ng-show="validEq" style="color: red;">Please make sure that the depature point is different from the destination point</p>
+
+
+ <br/>
+ <button class="w3-btn w3-red" ng-disabled="!pointA || !pointB || validEq" ng-click="book()">Book</button>
+	</div>
+</div>
+
+</div>
