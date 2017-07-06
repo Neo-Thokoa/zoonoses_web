@@ -1,6 +1,6 @@
 zoonosisModule.controller("homePageCtrl",
-    ["$scope", "$location",
-    function ($scope, $location) {
+    ["$scope", "$location", "zoonosisService",
+    function ($scope, $location, zoonosisService) {
 
       $scope.message = "Welcome. Please use the various menu items to navigate the system.";
       $scope.feedColor = "#005bab";

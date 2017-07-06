@@ -43,8 +43,8 @@ function Model5() {
 }
 
 zoonosisModule.controller("dataCollectionCtrl",
-    ["$scope", "$location", "zoonosisService", "$routeParams", "oiSelect",
-    function ($scope, $location, $rootScope, zoonosisService, $routeParams, rootScope, oiSelect) {
+    ["$scope", "$location", "ZoonosisService", "$routeParams", "oiSelect",
+    function ($scope, $location, $rootScope, ZoonosisService, $routeParams, rootScope, oiSelect) {
 
       $scope.Btnloader = false;
       $scope.part1 = true;
@@ -72,9 +72,18 @@ zoonosisModule.controller("dataCollectionCtrl",
           $scope.fieldSheetAns = $scope.yesNo[2];
           $scope.necropsySheetAns = $scope.yesNo[2];
 
-
+          console.log(ZoonosisService.helloWorld());
           //variables
-          $scope.division = {};
+          ZoonosisService.getTattooClass().then(function (results){
+            var data = results.data;
+            $scope.data = data;
+            console.log("Ayeye");
+            console.log(data);
+          },
+          function(results){
+            //on error
+            console.log(results.status);
+          });
           //get all tables in one server call
 
           // zoonosisService.getDates("./Json").then(function (results) {
@@ -84,15 +93,7 @@ zoonosisModule.controller("dataCollectionCtrl",
           //     newObject(data.list);
           //   });
 
-          var arr = [];
 
-
-          $scope.toSendDivision = [];
-
-          // start division dynamic add view
-          $scope.divisionCls = {
-              divisionObjArr: [new Model()]
-          };
 
 
 }]);
