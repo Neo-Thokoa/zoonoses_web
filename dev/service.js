@@ -1,7 +1,11 @@
 zoonosisModule.factory('ZoonosisService', ["$http", function ($http) {
 
+    // this.helloWorld = function (){
+    //     console.log("Hello");
+    // };
+
     var factoryObj = {};
-    var path = "./Json";
+    var path = "./Json/";
     console.log("Service activated");
     factoryObj.getTattooClass = function () {
       console.log("Inside Tattoo class");
@@ -12,9 +16,11 @@ zoonosisModule.factory('ZoonosisService', ["$http", function ($http) {
         return $http.get('datesAvailable.json');
     }
 
-    factoryObj.helloWorld = function () {
-        console.log("Hello");
-    };
+    factoryObj.getMusuemNum = function (){
+      console.log("Inside Museum class");
+      return $http.get(path + 'museumNumDB.json');
+    }
+
 
 
     return factoryObj;

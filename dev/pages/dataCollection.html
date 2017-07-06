@@ -77,23 +77,32 @@
                      </div>
                  </div>
 
-
-                 <!--<h5 id="subHeading">Related Information</h5>
-                 <hr />-->
-
                  <!-- Related faculty info-->
                  <!--Related faculty focus area-->
+                 <!-- TCome back to it -->
                  <div id="Department-group" class="form-group">
-                     <label class="col-sm-3 control-label">Related faculty focus area</label>
+                     <label class="col-sm-3 control-label">Tattoo number</label>
                      <div class="col-sm-9">
                          <div>
 
-                             <oi-select oi-options="x.RFFA_Description for x in RFFocusAreas"
-                                        ng-model="project2.RFFA"
-                                        required
-                                        placeholder="Select faculty focus area"></oi-select>
+                           <oi-select oi-options="x.name for x in tattooChoices"
+                                      ng-model="usersTattoAns"
+                                      required
+                                      placeholder="Has Tattoo number"></oi-select>
+
+                           <span class="help-block" ng-show="errorStatus">{{errorStatus}}</span>
                          </div>
-                         <p ng-show="project2.RFFA == null" id="help-block"> * Required</p>
+
+                     </div>
+                 </div>
+
+                 <div id="Department-group" class="form-group">
+                     <label class="col-sm-3 control-label">Other Project Number</label>
+                     <div class="col-sm-9">
+                         <div>
+                             <input type="text" name="otherProjectNumber" class="form-control"  ng-model="otherProjNum"  maxlength="250"></input>
+                             <span class="help-block" ng-show="errorProjectTitle">{{errorOPN}}</span>
+                         </div>
                      </div>
                  </div>
 

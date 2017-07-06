@@ -1,50 +1,7 @@
-function Model() {
-    this.divisiontype = null;
-    this.divisionName = null;
-    this.disable = false;
-}
-function Model2() {
-    this.funding = null;
-    this.ProjectAmount = null;
-    //this.fundingsArr = null;
-    this.disable = false;
-}
-function Model3() {
-    this.Question = null;
-    this.Answer = null;
-}
-function Model4() {
-    this.active = true;
-    this.dateMessage = null;
-    this.Collaborator = null;
-    this.DateFrom = null;
-    this.DateTo = null;
-    this.Subject = null;
-    this.InvalidDates = null;
-    this.Keyword = null;
-    this.ProjectRole = null;
-    this.ColaborationStatus = null;
-    this.ColaborationType = null;
-    this.CollaboratorsArr = null;
-}
-
-function Model5() {
-    this.active = true;
-    this.Staff = null;
-    this.DateFrom = null;
-    this.DateTo = null;
-    this.Subject = null;
-    this.InvalidDates = null;
-    this.Keyword = null;
-    this.ProjectRole = null;
-    this.ColaborationStatus = null;
-    this.ColaborationType = null;
-    this.StaffsArr = null;
-}
 
 zoonosisModule.controller("dataCollectionCtrl",
-    ["$scope", "$location", "ZoonosisService", "$routeParams", "oiSelect",
-    function ($scope, $location, $rootScope, ZoonosisService, $routeParams, rootScope, oiSelect) {
+    ["$scope", "$http", "$location", "ZoonosisService", "$routeParams", "oiSelect",
+    function ($scope, $location, $rootScope, ZoonosisService, $routeParams, rootScope, oiSelect, $http) {
 
       $scope.Btnloader = false;
       $scope.part1 = true;
@@ -72,26 +29,58 @@ zoonosisModule.controller("dataCollectionCtrl",
           $scope.fieldSheetAns = $scope.yesNo[2];
           $scope.necropsySheetAns = $scope.yesNo[2];
 
-          console.log(ZoonosisService.helloWorld());
           //variables
           ZoonosisService.getTattooClass().then(function (results){
-            var data = results.data;
-            $scope.data = data;
-            console.log("Ayeye");
-            console.log(data);
-          },
-          function(results){
-            //on error
-            console.log(results.status);
-          });
-          //get all tables in one server call
+             var data = results.data;
+             $scope.data = data;
+             console.log("Ayeye");
+             console.log(data);
+           },
+           function(results){
+          //   //on error
+             console.log(results.status);
+           });
 
-          // zoonosisService.getDates("./Json").then(function (results) {
-          //     //on success
-          //     var data = results.data;
-          //     $scope.data = results.data;
-          //     newObject(data.list);
-          //   });
+           $scope.tattooChoices = [{name: "No", value : 0}, {name: "Yes", value : 1}, {name: "Yes Recaptured", value : 0}];
+           $scope.usersTattoAns = $scope.yesNo[2];
+
+           $scope.tattooFunc = function(){
+             if($scope.usersTattoAns.value != 0)
+             {
+               //Has tattoo number recapture
+               if($scope.usersTattoAns.value == 1)
+               {
+
+               }
+               else
+               {
+
+               }
+             }
+           }
+
+           //Project number
+          $scope.otherProjNum = null;
+          $scope.errorOPN = null;
+          $scope.checkProjNum = function(){
+
+          }
+
+          //Meuseum number
+          $scope.museumNum = null;
+          $scope.currentMuseumNums = null;
+          ZoonosisService.getMusuemNum().then(function (results){
+             var data = results.data;
+             $scope.currentMuseumNums = data;
+             console.log("Ayeye");
+             console.log(data);
+           },
+           function(results){
+          //   //on error
+             console.log(results.status);
+           });
+
+
 
 
 

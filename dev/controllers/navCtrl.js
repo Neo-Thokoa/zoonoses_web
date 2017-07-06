@@ -1,6 +1,6 @@
 zoonosisModule.controller("navCtrl",
-    ["$scope", "$location","zoonosisService",
-    function ($scope, $location,zoonosisService) {
+    ["$scope", "$location","ZoonosisService",
+    function ($scope, $location,ZoonosisService) {
 
    $scope.navigate = function(val)
    {
