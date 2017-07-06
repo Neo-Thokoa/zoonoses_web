@@ -1,4 +1,4 @@
-transluxModule.controller("routesAndTimetablesCtrl",
+zoonosisModule.controller("routesAndTimetablesCtrl",
     ["$scope", "$location","transluxService",
     function ($scope, $location,transluxService) {
 

@@ -1,27 +1,40 @@
-  <div ng-controller="navCtrl">
+  <div ng-controller="navCtrl" id="navCont">
 
-  <nav class="navbar  navbar-fixed-top" style="opacity: 1; border-bottom: 3px groove white; background-color: #1a1a1a;">
-		<div class="container-fluid row">
+    <nav class="navbar navbar-inverse" id="daNavi">
+          <div class="container-fluid">
+              <div class="navbar-header">
+                  <a class="navbar-brand" >
+                      <img class="navImg" src="img/Icons/up-logo-long-200px.jpg" />
+                  </a>
+                  <h5 id="drpHead">Zoonosis</h5>
+                  <button type="button" class="navbar-toggle noBorder" data-toggle="collapse" data-target="#myNavbar">
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                  </button>
+              </div>
+          <div class="collapse navbar-collapse" id="myNavbar">
+              <!--<h4 id="drpHead">Departmental Research Plans</h4>-->
 
-		<div class="navbar-header col-sm-2" ng-click="navigate(6)">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar"  >
-				<span class="icon-bar whitebk" ></span>
-				<span class="icon-bar whitebk"></span>
-				<span class="icon-bar whitebk"></span>
-			</button>
-			<a class="navbar-brand"  style="font-family: impact; font-size: 50px;"><img src="img/TransluxLogo.png" alt="Chania" style=" cursor:pointer; cursor: hand;margin-left: -12px; margin-bottom:-20px; margin-top:-25px; width:100%; height:auto; display:inline;"></a>
-		</div>
+              <ul class="nav navbar-nav navbar-right">
+                  <li ng-click="home()" id="homeNav" class="navBtnW" ng-class="{ active: homeActive()}"><a> Home</a></li>
+                  <li ng-click="viewdataCollection()" class="navBtnW" id="projectNav" ><a> View Data Collection</a></li>
 
-		<div class="collapse navbar-collapse  col-sm-10" id="myNavbar">
-			<ul class="nav navbar-nav">
-						<li class="navHeadings" ng-click="navigate(1)"><a class="navHeadColour" ng-class="{ active: isActive('/bookings')}"><i class="fa fa-book" aria-hidden="true"></i> &nbsp; Bookings &nbsp;</a></li>
-						<li class="navHeadings" ng-click="navigate(2)" ><a class="navHeadColour" ng-class="{ active: isActive('/routesAndTimetables')}"> <i class="fa fa-location-arrow" aria-hidden="true"></i> &nbsp; Routes and timetables &nbsp;</a></li>
-            <li class="navHeadings" ng-click="navigate(3)" ><a class="navHeadColour" ng-class="{ active: isActive('/customerCare')}"> <i class="fa fa-phone" aria-hidden="true"></i>&nbsp; Customer Care &nbsp;</a></li>
-            <li class="navHeadings" ng-click="navigate(4)"><a  class="navHeadColour" ng-class="{ active: isActive('/promotions')}"> <i class="fa fa-percent" aria-hidden="true"></i>&nbsp; Promotions &nbsp;</a></li>
-            <li class="navHeadings" ng-click="navigate(5)"><a  class="navHeadColour" ng-class="{ active: isActive('/travelInfo')}"> <i class='fa fa-globe'></i>&nbsp; Travel Info</a></li>
-			</ul>
-		</div>
-	</div>
+                  <li ng-click="viewFindings()" class="navBtnW"><a> View Findings</a></li>
+                  <li class="navBtnW admBtn" ng-click="adminPanel()" ng-hide="!Auth.isAdmin" ng-class="{ active: adminActivate()}"><a> Admin </a></li>
+                  <li id="navPipe" ><a> | </a></li>
+
+
+                  <li class="dropdown navBtnW usrDrp">
+                      <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;"><span class="glyphicon glyphicon-user"></span>  User <span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                          <li ng-click="viewUserAccount()" ng-class="{ active: isActive()}"><a><span class="glyphicon glyphicon-user"></span> User </span></a></li>
+                          <li style="padding-right:15px;" ng-click="logout()"><a><span class="glyphicon glyphicon-log-in"></span> Logout </a></li>
+                      </ul>
+                  </li>
+              </ul>
+          </div>
+              </div>
   </nav>
 
   </div>

@@ -5,7 +5,7 @@
     padding:0px;
     margin:0px;
 }
- 
+
 .container-fluid {
     margin: 0px;
     padding: 0px;
@@ -35,7 +35,7 @@
 }
 
 #myNavbar ul {
-    
+
 }
 
 
@@ -50,7 +50,7 @@
 }
 
 .admBtn{
-    
+
 }
 
 .usrDrp{
@@ -96,16 +96,16 @@
     padding: 0px;
     color:white !important;
 }
-.loginLabel 
+.loginLabel
 {
     margin-top:5%;
 
 }
-#forgotPass 
+#forgotPass
 {
    float:right;
 }
-#regBtn 
+#regBtn
 {
     margin-left:7%;
 }
@@ -157,7 +157,7 @@
     position: static;
     color: black;
 }
-.dickMove{
+.eightenyardarea{
     height:70px;
 }
 #buttons
@@ -179,7 +179,7 @@
 
 #navbutton
 {
-	border-left: 3px solid #005bab; 
+	border-left: 3px solid #005bab;
 	border-right: 3px solid #005bab;
 }
 
@@ -190,8 +190,8 @@
 	//width:100px;
 }
 
-.navbar-inverse .navbar-nav > .open > a, 
-.navbar-inverse .navbar-nav > .open > a:hover, 
+.navbar-inverse .navbar-nav > .open > a,
+.navbar-inverse .navbar-nav > .open > a:hover,
 .navbar-inverse .navbar-nav > .open > a:focus
 {
     color: #005bab;
@@ -226,8 +226,8 @@
     color: white;
 }
 
-.navbar-inverse .navbar-nav > .active > a, 
-.navbar-inverse .navbar-nav > .active > a:hover, 
+.navbar-inverse .navbar-nav > .active > a,
+.navbar-inverse .navbar-nav > .active > a:hover,
 .navbar-inverse .navbar-nav > .active > a:focus {
     color: #005bab;
     background-color: white;
@@ -271,7 +271,7 @@
 }*/
 
 #myModal .modal-dialog  {
-    width:40%;    
+    width:40%;
     position:static;
     color:black;
 }
@@ -313,7 +313,7 @@
 #myModal3 .modal-dialog {
     width: 30%;
     position:static;
-   
+
 }
 
 #myModal3 {
@@ -323,7 +323,7 @@
 #logSearch {
     height:34px;
     text-align:center;
-    
+
 }
 
 body
@@ -380,19 +380,19 @@ th
 }
 #buttonFinal
 {
-    color:white; 
-    float:right; 
+    color:white;
+    float:right;
     margin-left:20px;
-    height:30px; 
+    height:30px;
     width:180px;
     background-color:#005bab;
 }
 
 .buttonDiv
 {
-    color:white; 
+    color:white;
     margin-left:20px;
-    height:30px; 
+    height:30px;
     width:180px;
 }
 
@@ -463,7 +463,7 @@ th
 
 .innerSection
 {
-  
+
     width:80%;
     margin:auto;
 }
@@ -471,7 +471,7 @@ th
 hr
 {
     border-color:#e10729;
-  
+
 }
 
 .inline
@@ -482,9 +482,9 @@ hr
 .tableButtons
 {
     color:white;
-    float:right; 
+    float:right;
     margin-left:0px;
-    height:30px; 
+    height:30px;
     min-width:180px;
 }
 
@@ -520,9 +520,9 @@ hr
     color:white;
      float:right;
       margin-left:20%;
-      height:30%; 
+      height:30%;
       width:8%;
-       background-color:#005bab; 
+       background-color:#005bab;
 }
 
 .divisionDrop
@@ -558,11 +558,11 @@ hr
 }
 .pictures {
     float:right;
-    position:relative; 
+    position:relative;
     /*left:25%;*/
     /*align-content:center;*/
     /*padding-left:26%;*/
-    
+
     padding-top:10px;
     height:80%;
     /*width:100%;*/
@@ -630,7 +630,7 @@ label {
 .YearsExpander
 {
     border: 2px solid darkgray;
-  
+
     background-color:gray;
     width:100%;
     margin-top:10px;
@@ -644,7 +644,7 @@ label {
 .subYearDetails {
     padding-left:3px;
     padding-right:3px;
-    
+
 }
 
 .datepickerdemoBasicUsage {
@@ -654,7 +654,7 @@ label {
   .datepickerdemoBasicUsage .validation-messages {
     font-size: 12px;
     color: #dd2c00;
-    margin-left: 15px; 
+    margin-left: 15px;
 
   }
 
@@ -670,7 +670,7 @@ label {
 
 
 .threeButtons {
-    min-width: 105px;     
+    min-width: 105px;
 }
 
 .glyphicon-search{

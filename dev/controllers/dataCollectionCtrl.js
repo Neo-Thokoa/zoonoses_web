@@ -1,177 +1,98 @@
+function Model() {
+    this.divisiontype = null;
+    this.divisionName = null;
+    this.disable = false;
+}
+function Model2() {
+    this.funding = null;
+    this.ProjectAmount = null;
+    //this.fundingsArr = null;
+    this.disable = false;
+}
+function Model3() {
+    this.Question = null;
+    this.Answer = null;
+}
+function Model4() {
+    this.active = true;
+    this.dateMessage = null;
+    this.Collaborator = null;
+    this.DateFrom = null;
+    this.DateTo = null;
+    this.Subject = null;
+    this.InvalidDates = null;
+    this.Keyword = null;
+    this.ProjectRole = null;
+    this.ColaborationStatus = null;
+    this.ColaborationType = null;
+    this.CollaboratorsArr = null;
+}
+
+function Model5() {
+    this.active = true;
+    this.Staff = null;
+    this.DateFrom = null;
+    this.DateTo = null;
+    this.Subject = null;
+    this.InvalidDates = null;
+    this.Keyword = null;
+    this.ProjectRole = null;
+    this.ColaborationStatus = null;
+    this.ColaborationType = null;
+    this.StaffsArr = null;
+}
+
 zoonosisModule.controller("dataCollectionCtrl",
-    ["$scope", "$location", "zoonosisService", "$routeParams",
-    function ($scope, $location, transluxService, $routeParams) {
+    ["$scope", "$location", "zoonosisService", "$routeParams", "oiSelect",
+    function ($scope, $location, $rootScope, zoonosisService, $routeParams, rootScope, oiSelect) {
 
-      var id = $routeParams.id;
-      if(id != null)
-      {
-        var idList = id.split(',');
-        console.log(idList);
-      }
+      $scope.Btnloader = false;
+      $scope.part1 = true;
+        $scope.part2 = false;
+        $scope.part3 = false;
+        $scope.part4 = false;
+        //$scope.version = oiSelect.version.full;
 
-      //$scope.pageName = "Bookings Page";
-      $scope.path = './Json/';
+      //Error messages
 
-      zoonosisService.getDeparturePoints($scope.path).then(function (results) {
-          //console.log(results.data);
-          $scope.departurePoints = results.data;
 
-          // for(var i = 0; i < idList.length; i++)
-          // {
-          if(id != null)
-          {
-              for(var x = 0; x < $scope.departurePoints.length; x++)
-              {
-                  if(idList[0] == $scope.departurePoints[x].Id)
-                  {
-                      $scope.departurePoint = $scope.departurePoints[x];
-                  }
-              }
-              $scope.setDestinationPoints();
-              for(var x = 0; x < $scope.destinationPoints.length; x++)
-              {
-                if(idList[1] == $scope.destinationPoints[x].Id)
-                {
-                    $scope.destinationPoint = $scope.destinationPoints[x];
-                }
-              }
-              $scope.step = 3;
-              $scope.loadEvents();
-            }
-          // }
+          $rootScope.showSaver2 = true;
+          $rootScope.showSaver = true;
 
-      },
-      function (results) {
-          // on error.
-          //console.log(results);
-      });
+          $scope.message = "Page 1/4 Add project information on this page.";
+          $scope.feedColor = "#005bab";
 
-      $scope.setDestinationPoints = function(){
-        $scope.destinationPoints = JSON.parse(JSON.stringify($scope.departurePoints));
-        var index = $scope.departurePoints.indexOf($scope.departurePoint);
-        //console.log(index);
-        if(index > -1){
-          $scope.destinationPoints.splice(index, 1);
-        }
+          $scope.url = {
 
-      }
-
-      $scope.getDates = function(){
-
-        transluxService.getDates($scope.path).then(function (results) {
-            //console.log(results.data);
-            $scope.calendar = results.data;
-        },
-        function (results) {
-            // on error.
-            //console.log(results);
-        });
-
-      }
-
-      $scope.check = function(indx, value, arr){
-        console.log(indx);
-        console.log(value);
-
-        if(indx == 1)
-          $scope.myYear = value;
-
-        if(indx == 2)
-          $scope.myMonth = value;
-
-        if(indx == 3)
-          $scope.myDay = value;
-
-        for(var ind = 0; ind < arr.length; ind++)
-        {
-          if (arr[ind].checked != null && arr[ind].checked == true)
-          {
-            arr[ind].checked = false;
-          }else {
-            arr[ind].checked = true;
+              templateUrl: "pages/navBar.html",
+              controller: "homePageCtrl"
           }
-        }
 
-      }
+          $scope.yesNo = [{ name: "Yes", value: 1 }, { name: "No", value: 0 }, { name: "-", value: null }];
+          $scope.fieldSheetAns = $scope.yesNo[2];
+          $scope.necropsySheetAns = $scope.yesNo[2];
 
-      $scope.setTime = function(time){
-        console.log(time);
-        $scope.time = time;
-      }
 
-      $scope.url = {
-        templateUrl: "pages/navBar.html",
-        controller: "navCtrl"
-      }
+          //variables
+          $scope.division = {};
+          //get all tables in one server call
 
-      ///////////////////////////////////// NEW CALENDAR CODE ////////////////////////////////////////
-      $scope.changeMode = function (mode) {
-        $scope.mode = mode;
-    };
+          // zoonosisService.getDates("./Json").then(function (results) {
+          //     //on success
+          //     var data = results.data;
+          //     $scope.data = results.data;
+          //     newObject(data.list);
+          //   });
 
-    $scope.today = function () {
-        $scope.currentDate = new Date();
-    };
+          var arr = [];
 
-    $scope.isToday = function () {
-        var today = new Date(),
-            currentCalendarDate = new Date($scope.currentDate);
 
-        today.setHours(0, 0, 0, 0);
-        currentCalendarDate.setHours(0, 0, 0, 0);
-        return today.getTime() === currentCalendarDate.getTime();
-    };
+          $scope.toSendDivision = [];
 
-    $scope.loadEvents = function () {
-        $scope.eventSource = createRandomEvents();
-    };
+          // start division dynamic add view
+          $scope.divisionCls = {
+              divisionObjArr: [new Model()]
+          };
 
-    $scope.onEventSelected = function (event) {
-        $scope.event = event;
-    };
-
-    $scope.onTimeSelected = function (selectedTime, events) {
-        console.log('Selected time: ' + selectedTime + ' hasEvents: ' + (events !== undefined && events.length !== 0));
-    };
-
-    function createRandomEvents() {
-        console.log("called");
-        var events = [];
-        for (var i = 0; i < 50; i += 1) {
-            var date = new Date();
-            //var eventType = Math.floor(Math.random() * 2);
-            var startDay = Math.floor(Math.random() * 90);
-            var endDay = startDay;
-            var startTime;
-            var endTime;
-
-                var startMinute = Math.floor(Math.random() * 24 * 60);
-                var endMinute = 5 + startMinute;
-                startTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + startDay, 0, date.getMinutes() + startMinute);
-                endTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + endDay, 0, date.getMinutes() + endMinute);
-                events.push({
-                    title: 'Booking for ' + $scope.departurePoint.name + ' -> ' + $scope.destinationPoint.name,
-                    startTime: startTime,
-                    endTime: endTime,
-                    allDay: false
-                });
-
-        }
-        return events;
-    }
-
-    $scope.step = 1;
-
-    $scope.nextStep = function(){
-      $scope.step++;
-    }
-
-    $scope.prevStep = function(){
-      $scope.step--;
-    }
-
-    $scope.goToPayments = function(){
-      $location.path('/payments');
-    }
 
 }]);

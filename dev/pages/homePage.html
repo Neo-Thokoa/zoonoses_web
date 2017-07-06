@@ -1,75 +1,39 @@
-<div ng-include="url.templateUrl" style="display:inline;"></div>
-<br/>
-<br/>
-<br/>
+<!-- <div ng-include="url.templateUrl" style="display:inline;"></div> -->
 
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+<!--<h2>Home Page</h2>-->
+<div class="container-fluid">
+    <!--<br>-->
+    <div ng-include="url.templateUrl" style="display:inline;"></div>
+    <div class="box">
+        <div class="midSection">
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 ng-show="para == 1" class="modal-title" style="text-align:center;">New Routes</h4>
-        <h4 ng-show="para == 2" class="modal-title" style="text-align:center;">Luggage Security</h4>
-        <h4 ng-show="para == 3" class="modal-title" style="text-align:center;">Bus Times Update</h4>
-      </div>
-      <div class="modal-body">
-        <p ng-show="para == 1">After six years of operation and close to 80 million passenger trips, the Gauteng Provincial Government (GPG) has demonstrated that the face of public transport can be radically changed. A modern and efficient public transport system such as Translux has had a positive impact on the provincial economy, alleviated traffic congestion and rejuvenated several inner cities in Johannesburg and Tshwane. It has created jobs and helped to re-establish the rail sector in our province.</p>
-        <p ng-show="para == 2">These Conditions of Carriage set out the terms that govern the relationship, responsibilities and liabilities as between the Passenger and the Carrier and are BINDING ON THE PARTIES.
-        The Passenger has entered into a Passage Contract with an Organiser and these conditions have been incorporated into the Passenger’s contract with the Organiser. These Terms and Conditions of Carriage will also apply where the Vessel is being used as a floating hotel whether or not there is a Passage Contract and whether or not there is any carriage. </p>
-        <p ng-show="para == 3">Check Bus times on social media platforms.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
+            <br/>
+            <div ng-controller="homePageCtrl" id="menu" style="height:70%; background-color:white;">
+
+                <div style="width:1140px;margin:auto">
+
+
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div ng-click="goTodataCollection()" class="hBtnDiv">
+                                <img class="eightenyardarea" src="img/icons/institutions-icon-128px.png" />
+                                <h4 class="hBtnText">Data Collection</h4>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div ng-click="viewFindings()" class="hBtnDiv">
+                                <img class="eightenyardarea" src="img/Icons/projects-icon-128px.png" />
+                                <h4 class="hBtnText">View Database</h4>
+                            </div>
+                        </div>
+                      </div>
+
+                    <!--</md-content>-->
+                </div>
+            </div>
+
+        </div>
     </div>
-
-  </div>
-</div>
-
-<div>
-
-
-<div class=" text-center" style="height: 10%;">
-  <img class="homePic" src="img/bus.jpg" alt="AYWYW" width="450px" height="280px"/>
-  <h1 id="indeed" style="color: black">Escape the hounding slow movers. <span class="trans" style="color: red">Translux</span> <span style = "display: block;">There is more places to see with us</span></h1>
-</div>
-
-
-<article>
-  <div id="pagewrap">
-    <header>
-		  <h2 style="color: black;">Latest News</h2>
-	  </header>
-    <section id="content" style="text-align:center;">
-  		<h3><strong>New Routes</strong></h3>
-  		<p>New Routes coming soon <br> </p>
-        <button ng-click="setVar(1);" type="button" class="w3-btn w3-red" data-toggle="modal" data-target="#myModal">READ MORE &gt;&gt;&gt;</button>
-  	</section>
-
-    <section id="middle" style="text-align:center;">
-  		<h3><strong>Luggage Security</strong></h3>
-      <p>You can trust us with your luggage <br> </p>
-  		<button ng-click="setVar(2);" type="button"  class="w3-btn w3-red" data-toggle="modal" data-target="#myModal">READ MORE &gt;&gt;&gt;</button>
-  	</section>
-
-    <aside id="sidebar" style="text-align:center;">
-      <h3><strong>Bus Times Update</strong></h3>
-      <p>Bus schedule includes student travels </p>
-
-      <button ng-click="setVar(3);" type="button" class="w3-btn w3-red" data-toggle="modal" data-target="#myModal">READ MORE &gt;&gt;&gt;</button>
-    </aside>
-
-    <footer class="container-fluid bg-4 text-center" style="background-color: #1a1a1a; color: white">
-      <h5 style="color: white;">Disclaimer</h5>
-      <p style="color: white;"> Translux/City-to-City, its Directors, Officers, Employees, Servants or Agents shall not be liable (whether in contract or delict) in any way whatsoever for loss, injury, loss of life, or damage of whatsoever nature and howsoever caused, whether or not caused by the negligence of Translux or City-to-City, its Directors, Officers, Employees, Servants or Agents, arising out of or connected in any way to the conveyance or non-conveyance by Translux or City-to-City of any passenger or any person or of the property of any person whether such property is accompanied by a passenger or notTranslux/City-to-City, its Directors, Officers, Employees, Servants or Agents shall not be liable (whether in contract or delict) in any way whatsoever for loss, injury, loss of life, or damage of whatsoever nature and howsoever caused, whether or not caused by the negligence of Translux or City-to-City, its Directors, Officers, Employees, Servants or Agents, arising out of or connected in any way to the conveyance or non-conveyance by Translux or City-to-City of any passenger or any person or of the property of any person whether such property is accompanied by a passenger or not.</p>
-      <a href="http://twitter.com/translux2"><i class="fa fa-twitter" aria-hidden="true"></i>Follow us here &nbsp;</a>
-      <a href="http://facebook.com/Translux-477787585586013/"><i class="fa fa-instagram" aria-hidden="true"></i>Check us here &nbsp;</a>
-      <a href="http://facebook.com/Translux-477787585586013/"><i class="fa fa-facebook-official" aria-hidden="true"></i> Like us here &nbsp; </a>
-    </div>
-  </div>
-</article>
 
 
 

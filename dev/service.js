@@ -1,13 +1,14 @@
 zoonosisModule.factory('zoonosisService', ["$http", function ($http) {
 
     var factoryObj = {};
+    var path = "./Json";
 
-    factoryObj.getDeparturePoints = function (path) {
-        return $http.get(path + 'departurePoints.json');
+    factoryObj.getTattooClass = function () {
+        return $http.get(path + 'tattoClassifications.json');
     }
 
-    factoryObj.getDates = function (path) {
-        return $http.get(path + 'datesAvailable.json');
+    factoryObj.getDates = function () {
+        return $http.get('datesAvailable.json');
     }
 
 

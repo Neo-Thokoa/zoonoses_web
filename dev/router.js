@@ -19,10 +19,6 @@ zoonosisModule.config(["$routeProvider", function($routeProvider) {
        templateUrl: "pages/measurements.html",
        controller: "measurementsCtrl"
    })
-   .when("/promotions", {
-       templateUrl: "pages/promotions.html",
-       controller: "promotionsCtrl"
-   })
    .when("/findings", {
        templateUrl: "pages/findings.html",
        controller: "findingsCtrl"
