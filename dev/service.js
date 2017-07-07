@@ -21,7 +21,10 @@ zoonosisModule.factory('ZoonosisService', ["$http", function ($http) {
       return $http.get(path + 'museumNumDB.json');
     }
 
-
+    factoryObj.getCVZLabNums = function (){
+      console.log("Inside CVZ class");
+      return $http.get(path + 'cvzLabDB.json');
+    }
 
     return factoryObj;
 }]);

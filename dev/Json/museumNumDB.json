@@ -1,12 +1,11 @@
-[
   {
+      "prefix" : "TM",
+      "currentDBMuseumNum": [
 
-      "currentMuseumNum": [
+          49160,
+          49161
 
-          {"value": "TM49160"},
-          {"value": "TM49161"}
         ]
 
 
   }
-]

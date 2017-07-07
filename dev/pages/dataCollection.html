@@ -6,7 +6,7 @@
 
 <div ng-controller="dataCollectionCtrl" class="box">
 
-     <form class="form-horizontal midSection" name="ResearchProjectForm">
+     <form class="form-horizontal midSection" name="PageOneForm">
 
          <!--First section of the project table-->
          <div class="bs-docs-section" ng-show="part1">
@@ -40,10 +40,10 @@
                      <label class="col-sm-3 control-label">CVZ Laboratory Number</label>
                      <div class="col-sm-9">
                          <div>
-                             <input type="text" name="projectTitle" class="form-control"  ng-model="project.ProjectTitle" required maxlength="250"></input>
+                             <input type="text" name="projectTitle" class="form-control"  ng-model="cvzCurrentNum" required maxlength="250" disabled></input>
                              <span class="help-block" ng-show="errorProjectTitle">{{errorProjectTitle}}</span>
                          </div>
-                         <p  id="help-block"> * Required</p>
+
                      </div>
                  </div>
 
@@ -77,8 +77,7 @@
                      </div>
                  </div>
 
-                 <!-- Related faculty info-->
-                 <!--Related faculty focus area-->
+
                  <!-- TCome back to it -->
                  <div id="Department-group" class="form-group">
                      <label class="col-sm-3 control-label">Tattoo number</label>
@@ -95,7 +94,7 @@
 
                      </div>
                  </div>
-
+                  <!-- Other Project Number -->
                  <div id="Department-group" class="form-group">
                      <label class="col-sm-3 control-label">Other Project Number</label>
                      <div class="col-sm-9">
@@ -106,143 +105,36 @@
                      </div>
                  </div>
 
-                 <!--Related FRT-->
+                 <!-- Museum Number -->
+                <div id="Department-group" class="form-group">
+                    <label class="col-sm-3 control-label">Museum Number</label>
+                    <div class="col-sm-9">
+                        <div>
+                            <input type="text" name="museumNumber" class="form-control"  ng-model="museumNum"  maxlength="250"></input>
+                            <span class="help-block" ng-show="errorProjectTitle">{{errorOPN}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                 <!--Experimental Colony-->
                  <div id="Department-group" class="form-group">
-                     <label class="col-sm-3 control-label">Related Faculty Research Themes (FRTs)</label>
+                     <label class="col-sm-3 control-label">Experimental Colony</label>
                      <div class="col-sm-9">
                          <div>
 
-                             <oi-select oi-options="x.RFRT_Description for x in FRTArray"
-                                        ng-model="project2.Related_FRT"
-                                        ng-required="true"
-                                        placeholder="Select FRT"></oi-select>
+                           <oi-select oi-options="x.name for x in requiredYesNo"
+                                      ng-model="experiColonAns"
+                                      required
+                                      placeholder="Indicate if live bat was taken to NCID for experimental purpose"></oi-select>
                          </div>
-                         <p ng-show="project2.Related_FRT == null" id="help-block"> * Required</p>
+                         <p id="help-block"> * Required</p>
                      </div>
                  </div>
 
-                 <!--Related IRT-->
-                 <div id="Department-group" class="form-group">
-                     <label class="col-sm-3 control-label">Related Institutional Research Themes (IRTs)</label>
-                     <div class="col-sm-9">
-                         <div>
+                 <!--End of page One-->
 
-                             <oi-select oi-options="x.RIRT_Description for x in IRTArray"
-                                        ng-model="project2.Related_IRT"
-                                        ng-required="true"
-                                        placeholder="Select IRT"></oi-select>
-                         </div>
-                         <p ng-show="project2.Related_IRT == null" id="help-block"> * Required</p>
-                     </div>
-                 </div>
-
-                 <!--Related Institute/s, Centre/s or Unit/s-->
-                 <div id="Department-group" class="form-group">
-                     <label class="col-sm-3 control-label">Related Institute/s, Centre/s or Unit/s</label>
-                     <div class="col-sm-9">
-                         <div>
-
-                             <oi-select oi-options="x.RI_Description for x in relatedInstituteArray"
-                                        ng-model="project2.RelatedInstitute"
-                                        ng-required="true"
-                                        placeholder="Select related institute"></oi-select>
-
-                         </div>
-                         <p ng-show="project2.RelatedInstitute == null" id="help-block"> * Required</p>
-                     </div>
-                 </div>
-
-                 <!--Related Chair/s-->
-                 <div id="Department-group" class="form-group">
-                     <label class="col-sm-3 control-label">Related Chair/s</label>
-                     <div class="col-sm-9">
-                         <div>
-
-                             <oi-select oi-options="x.RC_Description for x in relatedChairArray"
-                                        ng-model="project2.RelatedChair"
-                                        ng-required="true"
-                                        placeholder="Select related chair"></oi-select>
-                         </div>
-                         <p ng-show="project2.RelatedChair == null" id="help-block"> * Required</p>
-                     </div>
-                 </div>
-
-                 <!--Potential Centre/s, Unit/s or Chair/s that can emerge from this research-->
-                 <div id="RCP-group" class="form-group">
-                     <label class="col-sm-3 control-label">Potential Centre/s, Unit/s or Chair/s that can emerge from this research</label>
-                     <div class="col-sm-9">
-                         <div>
-                             <input type="text" name="potentialCentre" class="form-control"  ng-model="project.PotentialCenter" required></input>
-                             <span class="help-block" ng-show="errorPotentialCentre">{{errorPotentialCentre}}</span>
-                         </div>
-                         <p ng-show="ResearchProjectForm.potentialCentre.$invalid" id="help-block"> * Required</p>
-                     </div>
-                 </div>
-
-                 <div id="Department-group" class="form-group">
-                     <label class="col-sm-3 control-label">Does This Project Have Collaborators?</label>
-                     <div class="col-sm-9">
-                         <div>
-
-                             <oi-select oi-options="x.name for x in yesNo"
-                                        ng-model="yesNoShow"
-                                        ng-required="true"
-                                        placeholder="Select yes or no "></oi-select>
-                         </div>
-                         <p ng-show="yesNoShow == null || yesNoShow == ''" id="help-block"> * Required</p>
-                     </div>
-                 </div>
-
-                 <div id="Department-group" class="form-group row">
-                     <label class="col-sm-3 control-label">DateFrom</label>
-                     <div class="col-sm-3">
-                         <div>
-                             <md-datepicker md-current-view="year" md-placeholder="Enter date" id="date-select-box" name="DateFrom" ng-change="dateValidatePro(project)" ng-model="project.DateFrom" required></md-datepicker>
-                         </div>
-                     </div>
-                     <p ng-show="project.DateFrom == null" id="help-block"> * Required</p>
-                 </div>
-
-                 <div id="Department-group" class="form-group row">
-                     <label class="col-sm-3 control-label">DateTo</label>
-                     <div class="col-sm-3">
-                         <div>
-                             <md-datepicker md-current-view="year" md-placeholder="Enter date" id="date-select-box" name="DateTo" ng-change="dateValidatePro(project)" ng-model="project.DateTo" required></md-datepicker>
-                         </div>
-                     </div>
-                     <p ng-show="project.DateTo == null" id="help-block"> * Required</p>
-                 </div>
-
-                 <div id="Department-group" class="form-group">
-                     <label class="col-sm-3 control-label" style="color:red;"></label>
-                     <div class="col-sm-6">
-                         <div>
-                             <div ng-show="project.dateMessage" style="color:red;">{{project.dateMessage}}</div>
-                             <!--<p ng-show="ResearchProjectForm.project.DateFrom.$invalid" id="help-block"> * Required</p>-->
-                         </div>
-                     </div>
-
-                 </div>
-
-                 <div id="Department-group" class="form-group">
-                     <label class="col-sm-3 control-label">Keyword</label>
-                     <div class="col-sm-6">
-                         <div>
-                             <input name="keyword" class="form-control" ng-model="project.Keyword" maxlength="250" required />
-                         </div>
-                     </div>
-                     <p ng-show="project.Keyword == null" id="help-block"> * Required</p>
-                 </div>
-
-
-                 <!--<div class="saveButton" ng-show="!ResearchProjectForm.$dirty">
-
-                     <button type="submit" class="btn btn-block btn-primary" ng-click="NextPart(4);" ng-disabled="ResearchProjectForm.$invalid" >
-                         <span class="glyphicon glyphicon-arrow-right"></span> Next
-                     </button>
-                 </div>-->
                  <div class="saveButton" ng-show="!Btnloader">
-                     <button type="submit" class="btn btn-block btn-primary" ng-click="savePage1(); NextPart(4);" ng-disabled="ResearchProjectForm.$invalid" >
+                     <button type="submit" class="btn btn-block btn-primary" ng-click="savePage1(); NextPart(2);" ng-disabled="PageOneForm.$invalid" >
                          <span class="glyphicon glyphicon-arrow-right"></span> Next
                      </button>
                  </div>
@@ -265,404 +157,158 @@
 
      </form>
 
-     <form class="form-horizontal midSection" name="ResearchProjectForm3">
-     <div class="bs-docs-section" ng-show="part4">
 
-         <div class="page-section-header">
-             <div class="section-icon">
-                 <i class="">
-                     <img class="img-responsive" src="img/Icons/institutions-icon-128px.png" />
-                 </i>
-             </div>
-             <h4 id="h5">Which Divisions Are Involved With This Project?</h4>
-             <hr />
-         </div>
+      <!-- Page 2 -->
+      <form class="form-horizontal midSection" name="PageTwoForm">
 
-         <!--<h5 id="subHeading">Project Divisions</h5>
-         <hr />-->
+          <!--First section of the project table-->
+          <div class="bs-docs-section" ng-show="part2">
 
-         <div class="innerSection">
+              <div class="page-section-header">
+                  <div class="section-icon">
+                      <i class="">
+                          <img class="img-responsive" src="img/icons/projects-icon-128px.png" />
+                      </i>
+                  </div>
+                  <h4 id="h5">Data gathering</h4>
+                  <hr />
+              </div>
 
-             <div class="messages" ng-model="message" ng-show="message" style="border-color:{{feedColor}}">{{message}}</div>
+              <div class="innerSection">
 
-             <!--Project Divisions-->
-             <div class="form-group" id="flexiView">
-
-                 <div ng-repeat="divisionObj in divisionCls.divisionObjArr">
-                     <br />
-                     <oi-select class="divisionDrop" placeholder="Select Division Type" name="ProjectDivisionType" ng-model="divisionObj.divisiontype" ng-change="divNameSelector23(divisionObj)" oi-options="x.DT_Name for x in division.divisionTypes | orderBy:'DT_Name' track by x.DT_ID" ng-disabled="divisionObj.disable" ng-required="true">
-                     </oi-select>
-                     <oi-select placeholder="Select Division" class="divisionDrop " name="ProjectDivisionName" ng-model="divisionObj.divisionName" ng-change="divNameSelector24(divisionObj)" oi-options="x.DivisionName for x in divisionObj.divisions| orderBy:'DivisionName'" ng-disabled="divisionObj.disable" ng-required="true">
-                     </oi-select>
-
-                     <!--<a href="#" ng-click="remove(divisionObj, $event)" style="display:inline-block; margin-left: 20px;">Remove</a>-->
-                     <!--<input type="button" data-role="none" ng-click="removeDiv(divisionObj, $event)" value="remove">-->
-                     <button type="button" class="btn btn-link" ng-click="removeDiv(divisionObj, $event); divNameSelector23(divisionCls.divisionObjArr[divisionCls.divisionObjArr.length - 1])">Remove <span title="remove division" class="glyphicon glyphicon-trash"></span></button>
-
-                 </div>
-                 <!--<input type="button" data-role="none" ng-click="addDiv()" value="Add Division">-->
-                 <p ng-show="!divisionCls.divisionObjArr[divisionCls.divisionObjArr.length - 1].divisionName && divisionCls.divisionObjArr.length > 0" id="help-block"> * Required</p>
-                 <button type="button" class="btn btn-link" ng-click="addDiv()" ng-disabled="!divisionCls.divisionObjArr[divisionCls.divisionObjArr.length - 1].divisionName && divisionCls.divisionObjArr.length > 0">Add <span title="add division" class="glyphicon glyphicon-plus"></span></button>
-             </div>
-
-             <!--Next button -->
-             <div class="saveButton">
-                 <button type="button" class="btn btn-block btn-primary" ng-disabled="!divisionCls.divisionObjArr[divisionCls.divisionObjArr.length - 1].divisionName" ng-click="NextPart(1); SaveNextProject();">
-                     <span class="glyphicon glyphicon-arrow-right"></span> Next
-                 </button>
-             </div>
-             <div class="saveButton">
-                 <button title="delete project" type="button" class="btn btn-block btn-primary" ng-click="delete();">
-                     <span class="glyphicon glyphicon-remove-circle"></span> Delete Project
-                 </button>
-             </div>
-             <div class="saveButton">
-                 <button type="button" class="btn btn-block btn-primary" ng-click="Back(1)">
-                     <span class="glyphicon glyphicon-arrow-left"></span> Back
-                 </button>
-             </div>
-             <br />
-             <br />
-             <br />
-             </div>
-         </div>
-     </form>
-
-
-     <!--Second section of the project table containg collaborators-->
-     <form class="form-horizontal midSection" name="ResearchProjectForm3">
-        <div class="bs-docs-section" ng-show="part2">
-
-
-            <div class="page-section-header">
-                <div class="section-icon">
-                    <i class="">
-                        <img class="img-responsive" src="img/Icons/collaborations-icon-128px.png" />
-                    </i>
-                </div>
-                <h4 id="h5">Which Collaborators Are Involved With This Project?</h4>
-                <hr />
-            </div>
-
-            <div class="innerSection">
-
-                <!-- USER FEEDBACK -->
-                <div class="messages" ng-model="message" ng-show="message" style="border-color:{{feedColor}}">{{message}}</div>
-
-
-                <!--Pcollaborators Dynamic view-->
-                <div class="form-group" id="flexiView">
-
-                    <h5 id="subHeading">Collaborator Information</h5>
-
-                    <div ng-repeat="Pcollaborators in colaborationsCls.colaborationsObjArr">
-                        <hr />
-
-
-                        <div class="plusAndMinus">
-                            <span ng-hide="!Pcollaborators.active" ng-click="Pcollaborators.active = !Pcollaborators.active" id="plusMinus" class="glyphicon glyphicon-minus-sign"></span>
-                            <span ng-hide="Pcollaborators.active" ng-click="Pcollaborators.active = !Pcollaborators.active" id="plusMinus" class="glyphicon glyphicon-plus-sign"></span>
-                        </div>
-
-                        <div id="Department-group" class="form-group">
-                            <label class="col-sm-3 control-label">Collaborator</label>
-                            <div class="col-sm-6">
-                                <div>
-                                    <oi-select oi-options="x.Initials + ' '+ x.Name +' '+ x.Surname for x in Pcollaborators.CollaboratorsArr"
-                                               ng-model="Pcollaborators.Collaborator"
-                                               ng-required="true"
-                                               ng-change="dateValidate1(Pcollaborators); changeCollab()"
-                                               placeholder="Select Collaborator"></oi-select>
-                                </div>
-                                <div class="institutionButtons">
-                                    <button ng-show="Pcollaborators.active" type="button" class="btn btn-link" ng-click="addModal('collaborator', Pcollaborators)">Collaborator not here?</button>
-                                </div>
-                                <br />
-                            </div>
-                            <p ng-show="Pcollaborators.Collaborator == null" id="help-block"> * Required</p>
-                        </div>
-
-                        <div ng-show="Pcollaborators.active">
-
-                            <div id="Department-group" class="form-group">
-                                <label class="col-sm-3 control-label" style="color:red;"></label>
-                                <div class="col-sm-6">
-                                    <div>
-                                        <div ng-show="Pcollaborators.dateMessage" style="color:red;">{{Pcollaborators.dateMessage}}</div>
-                                        <p ng-show="ResearchProjectForm3.Pcollaborators.DateFrom.$invalid" id="help-block"> * Required</p>
-                                    </div>
-                                </div>
-
-                            </div>
+                  <!-- USER FEEDBACK -->
+                  <div class="messages" ng-model="message" ng-show="message" style="border-color:{{feedColor}}">{{message}}</div>
 
 
 
-                            <!--Project Role-->
-                            <div id="Department-group" class="form-group">
-                                <label class="col-sm-3 control-label">Project Role</label>
-                                <div class="col-sm-6">
-                                    <div>
-                                        <!--<select name="ProjectRole" class="form-control" ng-change="dateValidate1(Pcollaborators)" ng-model="Pcollaborators.ProjectRole" ng-options="x.PR_Description for x in ProjectRoleArr" required>
-                        <option value="">--select--</option>
-                    </select>-->
-                                        <oi-select oi-options="x.PR_Description for x in ProjectRoleArr"
-                                                   ng-model="Pcollaborators.ProjectRole"
-                                                   ng-required="true"
-                                                   ng-change="dateValidate1(Pcollaborators)"
-                                                   placeholder="Select project role"></oi-select>
-                                    </div>
-                                </div>
-                                <p ng-show="Pcollaborators.ProjectRole == null" id="help-block"> * Required</p>
-                            </div>
 
 
-                            <!--Colaboration status-->
-                            <div id="Department-group" class="form-group">
-                                <label class="col-sm-3 control-label">Collaboration status</label>
-                                <div class="col-sm-6">
-                                    <div>
-                                        <oi-select name="ColaborationStatus" ng-change="dateValidate1(Pcollaborators)" ng-model="Pcollaborators.ColaborationStatus" oi-options="x.CS_Description for x in ColaborationStatusArr"
-                                                   placeholder="Select Status"
-                                                   required>
-                                        </oi-select>
-                                    </div>
-                                </div>
-                                <p ng-show="Pcollaborators.ColaborationStatus == null" id="help-block"> * Required</p>
-                            </div>
-
-                            <!--Colaboration type-->
-                            <div id="Department-group" class="form-group">
-                                <label class="col-sm-3 control-label">Project type</label>
-                                <div class="col-sm-6">
-                                    <div>
-                                        <oi-select name="ColaborationType" ng-change="dateValidate1(Pcollaborators)" ng-model="Pcollaborators.ColaborationType" oi-options="x.CT_Description for x in ColaborationTypeArr"
-                                                   required
-                                                   placeholder="Select Collaboration Type">
-                                        </oi-select>
-                                    </div>
-                                </div>
-                                <p ng-show="Pcollaborators.ColaborationType == null" id="help-block"> * Required</p>
-                            </div>
-
-                        </div>
-
-                        <!--<input type="button" data-role="none" ng-click="removeCollab(Pcollaborators, $event)" value="remove">-->
-                        <button type="button" class="btn btn-link" ng-click="removeCollab(Pcollaborators, $event); changeCollab()">Remove <span title="remove collaborator" class="glyphicon glyphicon-trash"></span></button>
 
 
-                        <!--<input type="button" data-role="none" ng-click="addCollab()" value="Add Collaborator">-->
+                  <h5 id="subHeading">Bat Details</h5>
+                  <hr />
 
-                    </div>
+                  <!--Project Title-->
+                  <div id="Department-group" class="form-group">
+                      <label class="col-sm-3 control-label">CVZ Laboratory Number</label>
+                      <div class="col-sm-9">
+                          <div>
+                              <input type="text" name="projectTitle" class="form-control"  ng-model="cvzCurrentNum" required maxlength="250" disabled></input>
+                              <span class="help-block" ng-show="errorProjectTitle">{{errorProjectTitle}}</span>
+                          </div>
 
-                    <button type="button" class="btn btn-link" ng-click="addCollab()" ng-disabled="ResearchProjectForm3.$invalid">Add <span title="add collaborator" class="glyphicon glyphicon-plus"></span></button>
+                      </div>
+                  </div>
 
-                </div>
-                    <!--Next button -->
-                    <div class="saveButton">
-                        <button type="button" class="btn btn-block btn-primary" ng-click="NextPart(2); SaveNextProject();" ng-disabled="ResearchProjectForm3.$invalid">
-                            <span class="glyphicon glyphicon-arrow-right"></span> Next
-                        </button>
-                    </div>
-                    <div class="saveButton">
-                        <button title="delete project" type="button" class="btn btn-block btn-primary" ng-click="delete();">
-                            <span class="glyphicon glyphicon-remove-circle"></span> Delete Project
-                        </button>
-                    </div>
-                    <div class="saveButton">
-                        <button type="button" class="btn btn-block btn-primary" ng-click="Back(4)">
-                            <span class="glyphicon glyphicon-arrow-left"></span> Back
-                        </button>
-                    </div>
-                    <br />
-                    <br />
-                    <br />
+                  <!--Field sheet-->
+                  <div id="Department-group" class="form-group">
+                      <label class="col-sm-3 control-label">Field Sheet</label>
+                      <div class="col-sm-9">
+                          <div>
 
-            </div>
-         </div>
-     </form>
+                              <oi-select oi-options="x.name for x in yesNo"
+                                         ng-model="fieldSheetAns"
+                                         placeholder="Select status"></oi-select>
 
-     <!--fouth section of the project table containg project staff-->
-     <form class="form-horizontal midSection" name="ResearchProjectForm4">
-         <div class="bs-docs-section" ng-show="part3">
+                              <span class="help-block" ng-show="errorStatus">{{errorStatus}}</span>
+                          </div>
+                      </div>
+                  </div>
+
+                  <!--Necropsy sheet-->
+                  <div id="Department-group" class="form-group">
+                      <label class="col-sm-3 control-label">Necropsy Sheet</label>
+                      <div class="col-sm-9">
+                          <div>
+
+                              <oi-select oi-options="x.name for x in yesNo"
+                                         ng-model="necropsySheetAns"
+                                         placeholder="Select status"></oi-select>
+
+                              <span class="help-block" ng-show="errorStatus">{{errorStatus}}</span>
+                          </div>
+                      </div>
+                  </div>
 
 
-             <div class="page-section-header">
-                 <div class="section-icon">
-                     <i class="">
-                         <img class="img-responsive" src="img/Icons/collaborations-icon-128px.png" />
-                     </i>
-                 </div>
-                 <h4 id="h5">Which Collaborators Are Involved With This Project?</h4>
-                 <hr />
-             </div>
+                  <!-- TCome back to it -->
+                  <div id="Department-group" class="form-group">
+                      <label class="col-sm-3 control-label">Tattoo number</label>
+                      <div class="col-sm-9">
+                          <div>
 
-             <div class="innerSection">
+                            <oi-select oi-options="x.name for x in tattooChoices"
+                                       ng-model="usersTattoAns"
+                                       required
+                                       placeholder="Has Tattoo number"></oi-select>
 
-                 <!-- USER FEEDBACK -->
-                 <div class="messages" ng-model="message" ng-show="message" style="border-color:{{feedColor}}">{{message}}</div>
+                            <span class="help-block" ng-show="errorStatus">{{errorStatus}}</span>
+                          </div>
 
-                 <!--staffObj Dynamic view-->
-                 <div class="form-group" id="flexiView">
-                     <h5 id="subHeading">Staff Information</h5>
+                      </div>
+                  </div>
+                   <!-- Other Project Number -->
+                  <div id="Department-group" class="form-group">
+                      <label class="col-sm-3 control-label">Other Project Number</label>
+                      <div class="col-sm-9">
+                          <div>
+                              <input type="text" name="otherProjectNumber" class="form-control"  ng-model="otherProjNum"  maxlength="250"></input>
+                              <span class="help-block" ng-show="errorProjectTitle">{{errorOPN}}</span>
+                          </div>
+                      </div>
+                  </div>
 
-                     <div ng-repeat="staffObj in staffCls.staffObjArr">
-
-                         <hr />
-
-                         <div class="plusAndMinus">
-                             <span ng-hide="!staffObj.active" ng-click="staffObj.active = !staffObj.active" id="plusMinus" class="glyphicon glyphicon-minus-sign"></span>
-                             <span ng-hide="staffObj.active" ng-click="staffObj.active = !staffObj.active" id="plusMinus" class="glyphicon glyphicon-plus-sign"></span>
+                  <!-- Museum Number -->
+                 <div id="Department-group" class="form-group">
+                     <label class="col-sm-3 control-label">Museum Number</label>
+                     <div class="col-sm-9">
+                         <div>
+                             <input type="text" name="museumNumber" class="form-control"  ng-model="museumNum"  maxlength="250"></input>
+                             <span class="help-block" ng-show="errorProjectTitle">{{errorOPN}}</span>
                          </div>
-
-                         <div id="Department-group" class="form-group">
-                             <label class="col-sm-3 control-label">Staff Member</label>
-                             <div class="col-sm-6">
-                                 <div>
-                                     <oi-select name="Collaborator" ng-model="staffObj.Staff" ng-change="dateValidate2(staffObj); changeStaff()" oi-options="x.Initials + ' '+ x.Name +' '+ x.Surname for x in staffObj.StaffsArr"
-                                               required
-                                              placeholder="Select Staff">
-
-                                     </oi-select>
-                                     <div class="institutionButtons">
-                                         <button ng-show="staffObj.active" type="button" class="btn btn-link" ng-click="addModal('Staff', staffObj)">Staff member not here?</button>
-                                     </div>
-                                     <br />
-                                 </div>
-                             </div>
-                             <p ng-show="staffObj.Staff == null" id="help-block"> * Required</p>
-                         </div>
-
-                         <div ng-show="staffObj.active">
-                             <!--Dates-->
-                             <!--<div id="Department-group" class="form-group row">
-                                 <label class="col-sm-3 control-label">DateFrom</label>
-                                 <div class="col-sm-3">
-                                     <div>
-                                         <input id="date-select-box" class="form-control" type="date" name="DateFrom" data-datepicker="{theme: 'flat'}"  ng-change="dateValidate2(staffObj)" placeholder="" ng-model="staffObj.DateFrom" required />
-                                     </div>
-                                 </div>
-                                 <p ng-show="staffObj.DateFrom == null" id="help-block"> * Required</p>
-                             </div>
-
-                             <div id="Department-group" class="form-group row">
-                                 <label class="col-sm-3 control-label">DateTo</label>
-                                 <div class="col-sm-3">
-                                     <div>
-                                         <input id="date-select-box" type="date" name="DateTo" class="form-control" data-datepicker="{theme: 'flat'}" ng-change="dateValidate2(staffObj)" placeholder="" ng-model="staffObj.DateTo" required />
-                                     </div>
-                                 </div>
-                                 <p ng-show="staffObj.DateTo == null" id="help-block"> * Required</p>
-                                 <p1 id="messages" ng-model="staffObj.InvalidDates">{{staffObj.InvalidDates}}</p1>
-                             </div>-->
-
-                             <div id="Department-group" class="form-group">
-                                 <label class="col-sm-3 control-label" style="color:red;"></label>
-                                 <div class="col-sm-6">
-                                     <div>
-                                         <div ng-show="staffObj.dateMessage" style="color:red;">{{staffObj.dateMessage}}</div>
-                                         <!--<p ng-show="ResearchProjectForm4.DateFrom.$invalid" id="help-block"> * Required</p>-->
-                                     </div>
-                                 </div>
-                             </div>
-
-                             <!--<div id="Department-group" class="form-group">
-                                 <label class="col-sm-3 control-label">Subject</label>
-                                 <div class="col-sm-6">
-                                     <div>
-                                         <input name="Subject1" class="form-control" ng-change="dateValidate2(staffObj)" ng-model="staffObj.Subject" maxlength="250" required />
-                                     </div>
-                                 </div>
-                                 <p ng-show="staffObj.Subject == null" id="help-block"> * Required</p>
-                             </div>-->
-
-                             <!--<div id="Department-group" class="form-group">
-                                 <label class="col-sm-3 control-label">Keyword</label>
-                                 <div class="col-sm-6">
-                                     <div>
-                                         <input name="Keyword1" class="form-control" ng-change="dateValidate2(staffObj)" ng-model="staffObj.Keyword" maxlength="100" required />
-                                     </div>
-                                 </div>
-                                 <p ng-show="staffObj.Keyword == null" id="help-block"> * Required</p>
-                             </div>-->
-
-
-                             <!--Project Role-->
-                             <div id="Department-group" class="form-group">
-                                 <label class="col-sm-3 control-label">Project Role</label>
-                                 <div class="col-sm-6">
-                                     <div>
-                                         <oi-select name="ProjectRole" ng-change="dateValidate2(staffObj)" ng-model="staffObj.ProjectRole" oi-options="x.PR_Description for x in ProjectRoleArr"
-                                                    placeholder="Select Project Role"
-                                                    required>
-                                         </oi-select>
-                                     </div>
-                                 </div>
-                                 <p ng-show="staffObj.ProjectRole == null" id="help-block"> * Required</p>
-                             </div>
-
-
-                             <!--Colaboration status-->
-                             <!--<div id="Department-group" class="form-group">
-                                 <label class="col-sm-3 control-label">Colaboration status</label>
-                                 <div class="col-sm-6">
-                                     <div>
-                                         <oi-select name="ColaborationStatus" ng-change="dateValidate2(staffObj)" ng-model="staffObj.ColaborationStatus" oi-options="x.CS_Description for x in ColaborationStatusArr"
-                                                    placeholder="Select Colaboration Status"
-                                                    required>
-                                         </oi-select>
-                                     </div>
-                                 </div>
-                                 <p ng-show="staffObj.ColaborationStatus == null" id="help-block"> * Required</p>
-                             </div>-->
-
-                             <!--Colaboration type-->
-                             <div id="Department-group" class="form-group">
-                                 <label class="col-sm-3 control-label">Project type</label>
-                                 <div class="col-sm-6">
-                                     <div>
-                                         <oi-select name="ColaborationType" ng-change="dateValidate2(staffObj)" ng-model="staffObj.ColaborationType" oi-options="x.CT_Description for x in ColaborationTypeArr"
-                                                    placeholder="Select Collaboration type"
-                                                    required>
-                                         </oi-select>
-                                     </div>
-                                 </div>
-                                 <p ng-show="staffObj.ColaborationType == null" id="help-block"> * Required</p>
-                             </div>
-
-                         </div>
-                         <!--<input type="button" data-role="none" ng-click="removeStaff(staffObj, $event)" value="remove">-->
-                         <button type="button" class="btn btn-link" ng-click="removeStaff(staffObj, $event); changeStaff()">Remove <span title="remove staff" class="glyphicon glyphicon-trash"></span></button>
-
                      </div>
-
-                     <!--<input type="button" data-role="none" ng-click="addStaff()" value="Add Staff">-->
-                     <button type="button" class="btn btn-link" ng-click="addStaff()" ng-disabled="ResearchProjectForm4.$invalid">Add <span title="add staff" class="glyphicon glyphicon-plus"></span></button>
-
                  </div>
 
-                     <!--Next button -->
-                     <div class="saveButton">
-                         <button type="submit" class="btn btn-block btn-primary" ng-click="SaveProject();" ng-disabled="ResearchProjectForm4.$invalid">
-                             <span class="glyphicon glyphicon-floppy-disk"></span> Finish
-                         </button>
-                     </div>
-                     <div class="saveButton">
-                         <button title="delete project" type="button" class="btn btn-block btn-primary" ng-click="delete();">
-                             <span class="glyphicon glyphicon-remove-circle"></span> Delete Project
-                         </button>
-                     </div>
-                     <div class="saveButton">
-                         <button type="button" class="btn btn-block btn-primary" ng-click="Back(2)">
-                             <span class="glyphicon glyphicon-arrow-left"></span> Back
-                         </button>
-                     </div>
-                     <br />
-                     <br />
-                     <br />
+                  <!--Experimental Colony-->
+                  <div id="Department-group" class="form-group">
+                      <label class="col-sm-3 control-label">Experimental Colony</label>
+                      <div class="col-sm-9">
+                          <div>
 
-            </div>
-        </div>
-     </form>
+                            <oi-select oi-options="x.name for x in requiredYesNo"
+                                       ng-model="experiColonAns"
+                                       required
+                                       placeholder="Indicate if live bat was taken to NCID for experimental purpose"></oi-select>
+                          </div>
+                          <p id="help-block"> * Required</p>
+                      </div>
+                  </div>
+
+                  <!--End of page One-->
+
+                  <div class="saveButton" ng-show="!Btnloader">
+                      <button type="submit" class="btn btn-block btn-primary" ng-click="savePage1(); NextPart(2);" ng-disabled="PageOneForm.$invalid" >
+                          <span class="glyphicon glyphicon-arrow-right"></span> Next
+                      </button>
+                  </div>
+                  <div class="saveButton" ng-show="Btnloader">
+                      <button class="btn btn-primary btn-block active" style="color:black ; background:#33a6cc">
+                          <span style="position: relative; color:white; background-color:white;" us-spinner="{radius:3, width:3, length: 6}"></span>
+                      </button>
+                  </div>
+                  <div class="saveButton">
+                      <button type="button" class="btn btn-block btn-primary" ng-click="BackButton()">
+                          <span class="glyphicon glyphicon-arrow-left"></span> Back
+                      </button>
+                  </div>
+                  <br />
+                  <br />
+                  <br />
+                  </div>
+              </div>
+
+
+      </form>
 
             <!--third section of the project table containg questions-->
 
