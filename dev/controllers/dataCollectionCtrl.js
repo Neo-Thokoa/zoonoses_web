@@ -20,7 +20,7 @@ zoonosisModule.controller("dataCollectionCtrl",
           $rootScope.showSaver2 = true;
           $rootScope.showSaver = true;
 
-          $scope.message = "Page 1/4 Add project information on this page.";
+          $scope.message = "Page 1/4 Identification.";
           $scope.feedColor = "#68831e";
 
           $scope.url = {
@@ -88,6 +88,7 @@ zoonosisModule.controller("dataCollectionCtrl",
           //Meuseum number
           $scope.museumNum = null;
           $scope.currentMuseumNums = null;
+          $scope.isMuseum = true;
           ZoonosisService.getMusuemNum().then(function (results){
              var data = results.data;
              $scope.currentMuseumNums = data.currentDBMuseumNum;
@@ -108,6 +109,157 @@ zoonosisModule.controller("dataCollectionCtrl",
            $scope.requiredYesNo = [{ name: "Yes", value: 1 }, { name: "No", value: 0 }];
            $scope.experiColonAns = null;
 
+           //Page 2 stuff
+           $scope.currentSource = null;
+           $scope.datepicked = null;
+           $scope.currentSpecies = null;
+           $scope.confirmation = null;
+           $scope.currentLocality = null;
+           $scope.currentSite = null;
+           $scope.currentProvince = null;
+           $scope.currentCountry = null;
+           $scope.currentLattitude = null;
+           $scope.currentLongitude = null;
+           $scope.currentCollectors = null;
+           $scope.currentSex = null;
+           $scope.currentAge = null;
+
+           //Source / Host
+           $scope.hostOptions = null;
+           $scope.otherOptions = null;
+           $scope.sourceOptions = null;
+           ZoonosisService.getHost().then(function (results){
+              var data = results.data;
+              $scope.hostOptions = data.host.types;
+              $scope.otherOptions = data.host.otherTypes;
+              $scope.sourceOptions = data.source.types;
+              console.log(data);
+
+
+            },
+            function(results){
+           //   //on error
+              console.log(results.status);
+            });
+
+
+           //Date collected
+
+
+
+           //Species
+           $scope.speciesTypes = null;
+           ZoonosisService.getSpecies().then(function (results){
+              var data = results.data;
+              $scope.speciesTypes = data.name;
+
+
+            },
+            function(results){
+           //   //on error
+              console.log(results.status);
+            });
+
+
+           //Confirmation of species Identification
+           $scope.speciesIDoptions = ["Morphological", "Barcoding (Cytochrome b)", "Barcoding (Cytochrome c oxidase I)"];
+
+
+
+           //Locality
+           $scope.localDB = null;
+           ZoonosisService.getLocality().then(function (results){
+              var data = results.data;
+              $scope.localDB = data;
+              console.log("Locality return");
+              console.log($scope.localDB);
+            },
+            function(results){
+           //   //on error
+              console.log(results.status);
+            });
+
+            $scope.checkSelection = function()
+            {
+              var isFound = false;
+              for(var x = 0; x < $scope.localDB.length; x++)
+              {
+                if($scope.currentLocality == $scope.localDB[x].value)
+                {
+                  console.log("Yeah");
+                  isFound = true;
+                  $scope.currentCountry = $scope.localDB[x].situated.Country;
+                  console.log($scope.currentCountry);
+                }
+
+
+              }
+
+
+
+            }
+
+
+           //Site
+
+           //  Country
+           $scope.countryList = null;
+            $scope.isSouthAfrica = false;
+           ZoonosisService.getCountry().then(function (results){
+              var data = results.data;
+              $scope.countryList = data;
+              //console.log(data);
+
+            },
+            function(results){
+           //   //on error
+              console.log(results.status);
+            });
+
+            $scope.checkIfSA = function()
+            {
+              if($scope.currentCountry.country == "South Africa")
+              {
+                console.log("is SA");
+                $scope.isSouthAfrica = true;
+                $scope.currentProvince = null;
+              }
+              else {
+                console.log("Not");
+                console.log($scope.currentCountry.country);
+                $scope.isSouthAfrica = false;
+                $scope.currentProvince = null;
+              }
+            }
+
+
+           //Province
+
+           $scope.provinceList = null;
+           ZoonosisService.getProvince().then(function (results){
+              var data = results.data;
+              $scope.provinceList = data;
+
+
+            },
+            function(results){
+           //   //on error
+              console.log(results.status);
+            });
+
+
+          //Lattitude and longitude
+
+
+
+          //Collectors
+
+
+
+          //SEX
+
+          //AGE
+
            $scope.savePage1 = function () {
             $scope.Btnloader = true
             page1Obj.CVZ_LAB_NUM = $scope.cvzCurrentNum;
@@ -120,6 +272,24 @@ zoonosisModule.controller("dataCollectionCtrl",
 
             }
 
+             $scope.savePage2 = function () {
+              $scope.Btnloader = true
+              page2Obj.SOURCE = $scope.currentSource;
+              page2Obj.DATE_COLLECTED = $scope.datepicked;
+              page2Obj.SPECIES = $scope.currentSpecies;
+              page2Obj.CONFIRM_SPEC_ID = $scope.confirmation;
+              page2Obj.LOCALITY = $scope.currentLocality;
+              page2Obj.SITE = $scope.currentSite;
+              page2Obj.PROVINCE = $scope.currentProvince;
+              page2Obj.COUNTRY = $scope.currentCountry;
+              page2Obj.DECS = $scope.currentLattitude;
+              page2Obj.DECE = $scope.currentLongitude;
+              page2Obj.COLLECTORS = $scope.currentCollectors;
+              page2Obj.SEX = $scope.currentSex;
+              page2Obj.AGE = $scope.currentAge;
+
+              }
+
             $scope.NextPart = function (pn) {
             if (pn == 2) {
               //  console.log("here");
@@ -129,6 +299,7 @@ zoonosisModule.controller("dataCollectionCtrl",
                 $scope.part4 = false;
                 $scope.message = "Page 2/4 Description of sample.";
                 $scope.feedColor = "#68831e";
+                $scope.Btnloader = false;
             }
             else if (pn == 3) {
                 $scope.part1 = false;
@@ -137,6 +308,7 @@ zoonosisModule.controller("dataCollectionCtrl",
                 $scope.part4 = true;
                 $scope.message = "Page 2/4 Manage Divisions on this page. Click add to add a Division.";
                 $scope.feedColor = "#68831e";
+                $scope.Btnloader = false;
             }
             else if (pn == 4) {
                 $scope.part1 = false;
@@ -145,6 +317,7 @@ zoonosisModule.controller("dataCollectionCtrl",
                 $scope.part4 = false;
                 $scope.message = "Page 4/4 Manage staff on this page. Click add to add a staff member.";
                 $scope.feedColor = "#68831e";
+                $scope.Btnloader = false;
             }
             else {
                 $scope.part1 = true;
@@ -154,6 +327,8 @@ zoonosisModule.controller("dataCollectionCtrl",
                 $scope.message = "Page 1/4 Edit project information on this page.";
                 $scope.feedColor = "#68831e";
             }
+
+            $scope.Btnloader = false;
 
         }
 

@@ -26,5 +26,30 @@ zoonosisModule.factory('ZoonosisService', ["$http", function ($http) {
       return $http.get(path + 'cvzLabDB.json');
     }
 
+    factoryObj.getHost = function(){
+      console.log("Inside Host");
+      return $http.get(path + 'host.json');
+    }
+
+    factoryObj.getSpecies = function(){
+      console.log("Inside species");
+      return $http.get(path + 'species.json');
+    }
+
+    factoryObj.getProvince = function(){
+      console.log("Inside province");
+      return $http.get(path + 'province.json');
+    }
+
+    factoryObj.getCountry = function(){
+      console.log("Inside country");
+      return $http.get(path + 'countries.json');
+    }
+
+    factoryObj.getLocality = function(){
+      console.log("Inside Locality");
+      return $http.get(path + 'localityDB.json');
+    }
+
     return factoryObj;
 }]);

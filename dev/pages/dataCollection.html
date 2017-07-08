@@ -188,106 +188,197 @@
                   <h5 id="subHeading">Bat Details</h5>
                   <hr />
 
-                  <!--Project Title-->
+                  <!--Source/Host-->
                   <div id="Department-group" class="form-group">
-                      <label class="col-sm-3 control-label">CVZ Laboratory Number</label>
+                      <label class="col-sm-3 control-label">Source / Host</label>
                       <div class="col-sm-9">
-                          <div>
-                              <input type="text" name="projectTitle" class="form-control"  ng-model="cvzCurrentNum" required maxlength="250" disabled></input>
-                              <span class="help-block" ng-show="errorProjectTitle">{{errorProjectTitle}}</span>
-                          </div>
+                        <div>
+
+                          <oi-select oi-options="x for x in hostOptions"
+                                     ng-model="currentSource"
+                                     required
+                                     placeholder="Type of bat sampled"></oi-select>
+                        </div>
+                        <p id="help-block"> * Required</p>
 
                       </div>
                   </div>
 
-                  <!--Field sheet-->
+                  <!--Date Collected-->
+                  <div id="Department-group" class="form-group row">
+                      <label class="col-sm-3 control-label">Date Collected</label>
+                      <div class="col-sm-9">
+                        <div>
+                           <md-datepicker md-current-view="year" md-placeholder="Enter date" id="date-select-box" name="DateFrom" ng-change="dateValidatePro(project)" ng-model="project.DateFrom" required></md-datepicker>
+                       </div>
+                      </div>
+                      <p ng-show="project.DateFrom == null" id="help-block"> * Required</p>
+                  </div>
                   <div id="Department-group" class="form-group">
-                      <label class="col-sm-3 control-label">Field Sheet</label>
+                     <label class="col-sm-3 control-label" style="color:red;"></label>
+                     <div class="col-sm-6">
+                         <div>
+                             <div ng-show="project.dateMessage" style="color:red;">{{project.dateMessage}}</div>
+                             <!--<p ng-show="ResearchProjectForm.project.DateFrom.$invalid" id="help-block"> * Required</p>-->
+                         </div>
+                     </div>
+
+                 </div>
+
+                  <!--Species-->
+                  <div id="Department-group" class="form-group">
+                      <label class="col-sm-3 control-label">Species</label>
                       <div class="col-sm-9">
                           <div>
 
-                              <oi-select oi-options="x.name for x in yesNo"
-                                         ng-model="fieldSheetAns"
-                                         placeholder="Select status"></oi-select>
+                              <oi-select oi-options="x for x in speciesTypes"
+                                         ng-model="currentSpecies"
+                                         ng-required
+                                         placeholder="Select Species"></oi-select>
+
 
                               <span class="help-block" ng-show="errorStatus">{{errorStatus}}</span>
                           </div>
-                      </div>
-                  </div>
-
-                  <!--Necropsy sheet-->
-                  <div id="Department-group" class="form-group">
-                      <label class="col-sm-3 control-label">Necropsy Sheet</label>
-                      <div class="col-sm-9">
-                          <div>
-
-                              <oi-select oi-options="x.name for x in yesNo"
-                                         ng-model="necropsySheetAns"
-                                         placeholder="Select status"></oi-select>
-
-                              <span class="help-block" ng-show="errorStatus">{{errorStatus}}</span>
-                          </div>
+                          <p ng-show="project.DateFrom == null" id="help-block"> * Required</p>
                       </div>
                   </div>
 
 
-                  <!-- TCome back to it -->
+                  <!-- Confirmation of species identification -->
                   <div id="Department-group" class="form-group">
-                      <label class="col-sm-3 control-label">Tattoo number</label>
+                      <label class="col-sm-3 control-label">Confirmation of species identification</label>
                       <div class="col-sm-9">
                           <div>
 
-                            <oi-select oi-options="x.name for x in tattooChoices"
-                                       ng-model="usersTattoAns"
-                                       required
-                                       placeholder="Has Tattoo number"></oi-select>
+                            <oi-select oi-options="x for x in speciesIDoptions"
+                                       ng-model="confirmation"
+                                       placeholder="Select Confirmation of Species Identification"></oi-select>
 
                             <span class="help-block" ng-show="errorStatus">{{errorStatus}}</span>
                           </div>
 
                       </div>
                   </div>
-                   <!-- Other Project Number -->
+                   <!-- Locality -->
                   <div id="Department-group" class="form-group">
-                      <label class="col-sm-3 control-label">Other Project Number</label>
+                      <label class="col-sm-3 control-label">Locality</label>
                       <div class="col-sm-9">
                           <div>
-                              <input type="text" name="otherProjectNumber" class="form-control"  ng-model="otherProjNum"  maxlength="250"></input>
+                              <input type="text" placeholder="Indicate Locality"  ng-model="currentLocality"  typeahead="x.value for x in localDB | filter:$viewValue" class="form-control" ng-change="checkSelection()" required></input>
+
+                          </div>
+                          <!-- <p id="help-block"> * Required</p> -->
+                      </div>
+                  </div>
+
+                  <!-- Site -->
+                 <div id="Department-group" class="form-group">
+                     <label class="col-sm-3 control-label">Site</label>
+                     <div class="col-sm-9">
+                         <div>
+                             <input type="text" name="museumNumber" class="form-control"  ng-model="currentSite"  maxlength="250"></input>
+                             <span class="help-block" ng-show="errorProjectTitle">{{errorOPN}}</span>
+                         </div>
+                         <p id="help-block"> * Required</p>
+                     </div>
+
+                 </div>
+
+                 <!-- Country -->
+                 <div id="Department-group" class="form-group">
+                     <label class="col-sm-3 control-label">Country</label>
+                     <div class="col-sm-9">
+                         <div>
+                           <oi-select oi-options="x.country for x in countryList"
+                                      ng-model="currentCountry"
+                                      ng-change="checkIfSA()"
+                                      required
+                                      placeholder="Indicate Country locality is based in"></oi-select>
+                         </div>
+                         <p id="help-block"> * Required</p>
+                     </div>
+                 </div>
+
+                  <!-- Province/Region-->
+                  <div id="Department-group" class="form-group">
+                      <label class="col-sm-3 control-label">Province/Region</label>
+                      <div class="col-sm-9">
+                          <div ng-show="isSouthAfrica">
+
+                            <oi-select oi-options="x.province for x in provinceList"
+                                       ng-model="currentProvince"
+                                       required
+                                       placeholder="Indicate Province locality is based in"></oi-select>
+                          </div>
+
+                              <div ng-show="!isSouthAfrica">
+                                  <input type="text" name="regionBoss" class="form-control"  ng-model="currentProvince" required maxlength="250" placeholder="Indicate Region locality is based in"></input>
+                                  <span class="help-block" ng-show="errorProjectTitle">{{errorProjectTitle}}</span>
+                              </div>
+
+                          <p id="help-block"> * Required</p>
+                      </div>
+                  </div>
+
+                  <!-- Dec (S) -->
+                  <div id="Department-group" class="form-group">
+                      <label class="col-sm-3 control-label">Dec(S)</label>
+                      <div class="col-sm-9">
+                          <div>
+                              <input type="text" name="museumNumber" class="form-control"  ng-model="currentLattitude"  maxlength="250"></input>
                               <span class="help-block" ng-show="errorProjectTitle">{{errorOPN}}</span>
                           </div>
                       </div>
                   </div>
 
-                  <!-- Museum Number -->
-                 <div id="Department-group" class="form-group">
-                     <label class="col-sm-3 control-label">Museum Number</label>
-                     <div class="col-sm-9">
-                         <div>
-                             <input type="text" name="museumNumber" class="form-control"  ng-model="museumNum"  maxlength="250"></input>
-                             <span class="help-block" ng-show="errorProjectTitle">{{errorOPN}}</span>
-                         </div>
-                     </div>
-                 </div>
-
-                  <!--Experimental Colony-->
+                  <!-- Dec(E) -->
                   <div id="Department-group" class="form-group">
-                      <label class="col-sm-3 control-label">Experimental Colony</label>
+                      <label class="col-sm-3 control-label">Dec(E)</label>
                       <div class="col-sm-9">
                           <div>
-
-                            <oi-select oi-options="x.name for x in requiredYesNo"
-                                       ng-model="experiColonAns"
-                                       required
-                                       placeholder="Indicate if live bat was taken to NCID for experimental purpose"></oi-select>
+                              <input type="text" name="museumNumber" class="form-control"  ng-model="currentLongitude"  maxlength="250"></input>
+                              <span class="help-block" ng-show="errorProjectTitle">{{errorOPN}}</span>
                           </div>
-                          <p id="help-block"> * Required</p>
                       </div>
                   </div>
 
-                  <!--End of page One-->
+                  <!-- Received from/Collectors -->
+                  <div id="Department-group" class="form-group">
+                      <label class="col-sm-3 control-label">Received from / Collectors</label>
+                      <div class="col-sm-9">
+                          <div>
+                              <input type="text" name="museumNumber" class="form-control"  ng-model="currentCollectors"  maxlength="250"></input>
+                              <span class="help-block" ng-show="errorProjectTitle">{{errorOPN}}</span>
+                          </div>
+                      </div>
+                  </div>
+
+                  <!-- Sex -->
+                  <div id="Department-group" class="form-group">
+                      <label class="col-sm-3 control-label">Sex</label>
+                      <div class="col-sm-9">
+                          <div>
+                              <input type="text" name="museumNumber" class="form-control"  ng-model="currentSex"  maxlength="250"></input>
+                              <span class="help-block" ng-show="errorProjectTitle">{{errorOPN}}</span>
+                          </div>
+                      </div>
+                  </div>
+
+                  <!-- Age -->
+                  <div id="Department-group" class="form-group">
+                      <label class="col-sm-3 control-label">Age</label>
+                      <div class="col-sm-9">
+                          <div>
+                              <input type="text" name="museumNumber" class="form-control"  ng-model="currentAge"  maxlength="250"></input>
+                              <span class="help-block" ng-show="errorProjectTitle">{{errorOPN}}</span>
+                          </div>
+                      </div>
+                  </div>
+
+                  <!--End of page Two-->
 
                   <div class="saveButton" ng-show="!Btnloader">
-                      <button type="submit" class="btn btn-block btn-primary" ng-click="savePage1(); NextPart(2);" ng-disabled="PageOneForm.$invalid" >
+                      <button type="submit" class="btn btn-block btn-primary" ng-click="savePage2(); NextPart(3);" ng-disabled="PageTwoForm.$invalid" >
                           <span class="glyphicon glyphicon-arrow-right"></span> Next
                       </button>
                   </div>
@@ -297,7 +388,7 @@
                       </button>
                   </div>
                   <div class="saveButton">
-                      <button type="button" class="btn btn-block btn-primary" ng-click="BackButton()">
+                      <button type="button" class="btn btn-block btn-primary" ng-click="Back(1)">
                           <span class="glyphicon glyphicon-arrow-left"></span> Back
                       </button>
                   </div>
