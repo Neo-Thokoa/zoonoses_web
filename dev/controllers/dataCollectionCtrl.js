@@ -20,7 +20,7 @@ zoonosisModule.controller("dataCollectionCtrl",
           $rootScope.showSaver2 = true;
           $rootScope.showSaver = true;
 
-          $scope.message = "Page 1/4 Identification.";
+          $scope.message = "Page 1/7 Identification.";
           $scope.feedColor = "#68831e";
 
           $scope.url = {
@@ -257,8 +257,44 @@ zoonosisModule.controller("dataCollectionCtrl",
 
 
           //SEX
+          $scope.sexOptions = null;
+          ZoonosisService.getSex().then(function (results){
+             var data = results.data;
+             $scope.sexOptions = data;
+             console.log(data);
+
+           },
+           function(results){
+          //   //on error
+             console.log(results.status);
+           });
 
           //AGE
+          $scope.ageOptions = null;
+          ZoonosisService.getAge().then(function (results){
+             var data = results.data;
+             $scope.ageOptions = data;
+             console.log(data);
+
+           },
+           function(results){
+          //   //on error
+             console.log(results.status);
+           });
+
+           //Page 3
+           $scope.diedBefore = false;
+           $scope.wasDead = false;
+           $scope.diedAfter = false;
+           $scope.euthanised = false;
+
+           $scope.trueFalse = [{name : "Yes (Y)", value : true}, {name : "No (N)", value : false}];
+           $scope.checkSomething = function()
+           {
+             console.log($scope.wasDead);
+           }
+
+           //End of page 3
 
            $scope.savePage1 = function () {
             $scope.Btnloader = true
@@ -297,24 +333,24 @@ zoonosisModule.controller("dataCollectionCtrl",
                 $scope.part2 = true;
                 $scope.part3 = false;
                 $scope.part4 = false;
-                $scope.message = "Page 2/4 Description of sample.";
+                $scope.message = "Page 2/7 Description of sample.";
                 $scope.feedColor = "#68831e";
                 $scope.Btnloader = false;
             }
             else if (pn == 3) {
                 $scope.part1 = false;
                 $scope.part2 = false;
-                $scope.part3 = false;
-                $scope.part4 = true;
-                $scope.message = "Page 2/4 Manage Divisions on this page. Click add to add a Division.";
+                $scope.part3 = true;
+                $scope.part4 = false;
+                $scope.message = "Page 3/7 Manage Voucher details.";
                 $scope.feedColor = "#68831e";
                 $scope.Btnloader = false;
             }
             else if (pn == 4) {
                 $scope.part1 = false;
                 $scope.part2 = false;
-                $scope.part3 = true;
-                $scope.part4 = false;
+                $scope.part3 = false;
+                $scope.part4 = true;
                 $scope.message = "Page 4/4 Manage staff on this page. Click add to add a staff member.";
                 $scope.feedColor = "#68831e";
                 $scope.Btnloader = false;

@@ -209,7 +209,7 @@
                       <label class="col-sm-3 control-label">Date Collected</label>
                       <div class="col-sm-9">
                         <div>
-                           <md-datepicker md-current-view="year" md-placeholder="Enter date" id="date-select-box" name="DateFrom" ng-change="dateValidatePro(project)" ng-model="project.DateFrom" required></md-datepicker>
+                           <md-datepicker md-current-view="year" md-placeholder="Enter date" id="date-select-box" name="DateFrom" ng-change="dateValidatePro(project)" ng-model="project.DateFrom" ></md-datepicker>
                        </div>
                       </div>
                       <p ng-show="project.DateFrom == null" id="help-block"> * Required</p>
@@ -357,10 +357,15 @@
                   <div id="Department-group" class="form-group">
                       <label class="col-sm-3 control-label">Sex</label>
                       <div class="col-sm-9">
-                          <div>
-                              <input type="text" name="museumNumber" class="form-control"  ng-model="currentSex"  maxlength="250"></input>
-                              <span class="help-block" ng-show="errorProjectTitle">{{errorOPN}}</span>
-                          </div>
+                        <div>
+
+                          <oi-select oi-options="x.sex for x in sexOptions"
+                                     ng-model="currentSex"
+                                     required
+                                     placeholder="Select sex of bat"></oi-select>
+                        </div>
+                        <p id="help-block"> * Required</p>
+
                       </div>
                   </div>
 
@@ -368,10 +373,14 @@
                   <div id="Department-group" class="form-group">
                       <label class="col-sm-3 control-label">Age</label>
                       <div class="col-sm-9">
-                          <div>
-                              <input type="text" name="museumNumber" class="form-control"  ng-model="currentAge"  maxlength="250"></input>
-                              <span class="help-block" ng-show="errorProjectTitle">{{errorOPN}}</span>
-                          </div>
+                        <div>
+
+                          <oi-select oi-options="x.Age for x in ageOptions"
+                                     ng-model="currentAge"
+                                     required
+                                     placeholder="Select age of bat"></oi-select>
+                        </div>
+                        <p id="help-block"> * Required</p>
                       </div>
                   </div>
 
@@ -401,8 +410,123 @@
 
       </form>
 
-            <!--third section of the project table containg questions-->
+      <!-- Page 3 -->
+      <form class="form-horizontal midSection" name="PageThreeForm">
 
+          <!--First section of the project table-->
+          <div class="bs-docs-section" ng-show="part3">
+
+              <div class="page-section-header">
+                  <div class="section-icon">
+                      <i class="">
+                          <img class="img-responsive" src="img/icons/projects-icon-128px.png" />
+                      </i>
+                  </div>
+                  <h4 id="h5">Data gathering</h4>
+                  <hr />
+              </div>
+
+              <div class="innerSection">
+
+                  <!-- USER FEEDBACK -->
+                  <div class="messages" ng-model="message" ng-show="message" style="border-color:{{feedColor}}">{{message}}</div>
+
+
+
+
+
+
+
+                  <h5 id="subHeading">Voucher details</h5>
+                  <hr />
+
+                  <!--Found Dead-->
+                  <div id="Department-group" class="form-group">
+                      <label class="col-sm-3 control-label">Found Dead</label>
+                      <div class="col-sm-9">
+                        <div>
+
+                          <oi-select oi-options="x.name for x in trueFalse"
+                                     ng-model="wasDead"
+                                      ng-change="checkSomething()"
+
+                                     required
+                                     placeholder="Type of bat sampled"></oi-select>
+                        </div>
+
+                      </div>
+                  </div>
+
+                  <!-- Died before processing -->
+                  <div id="Department-group" class="form-group">
+                      <label class="col-sm-3 control-label">Died before processing</label>
+                      <div class="col-sm-9">
+                        <div>
+
+                          <oi-select oi-options="x for x in trueFalse"
+                                     ng-model="diedBefore"
+                                     required
+                                     placeholder="Type of bat sampled"></oi-select>
+                        </div>
+
+                      </div>
+                  </div>
+
+                  <div id="Department-group" class="form-group">
+                      <label class="col-sm-3 control-label">Died after processing</label>
+                      <div class="col-sm-9">
+                        <div>
+
+                          <oi-select oi-options="x for x in trueFalse"
+                                     ng-model="diedAfter"
+                                     required
+                                     placeholder="Type of bat sampled"></oi-select>
+                        </div>
+
+                      </div>
+                  </div>
+
+                  <div id="Department-group" class="form-group">
+                      <label class="col-sm-3 control-label">Euthanized due to human exposure</label>
+                      <div class="col-sm-9">
+                        <div>
+
+                          <oi-select oi-options="x for x in trueFalse"
+                                     ng-model="euthanised"
+                                     required
+                                     placeholder="Type of bat sampled"></oi-select>
+                        </div>
+
+                      </div>
+                  </div>
+                  <!--End of page Three-->
+
+                  <div class="saveButton" ng-show="!Btnloader">
+                      <button type="submit" class="btn btn-block btn-primary" ng-click="savePage3(); NextPart(4);" ng-disabled="PageTwoForm.$invalid" >
+                          <span class="glyphicon glyphicon-arrow-right"></span> Next
+                      </button>
+                  </div>
+                  <div class="saveButton" ng-show="Btnloader">
+                      <button class="btn btn-primary btn-block active" style="color:black ; background:#33a6cc">
+                          <span style="position: relative; color:white; background-color:white;" us-spinner="{radius:3, width:3, length: 6}"></span>
+                      </button>
+                  </div>
+                  <div class="saveButton">
+                      <button type="button" class="btn btn-block btn-primary" ng-click="Back(2)">
+                          <span class="glyphicon glyphicon-arrow-left"></span> Back
+                      </button>
+                  </div>
+                  <br />
+                  <br />
+                  <br />
+                  </div>
+              </div>
+
+
+      </form>
+
+
+      <!-- End of page 3 -->
      <div class="modal fade" id="addModal" role="dialog">
          <div class="modal-dialog modal-lg">
              <div class="modal-content">
