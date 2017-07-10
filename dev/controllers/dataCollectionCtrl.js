@@ -44,11 +44,14 @@ zoonosisModule.controller("dataCollectionCtrl",
             console.log(results.status);
           });
 
+          $scope.recaptureTattoo = null;
+
           $scope.yesNo = [{ name: "Yes", value: 1 }, { name: "No", value: 0 }, { name: "-", value: null }];
           $scope.fieldSheetAns = $scope.yesNo[2];
           $scope.necropsySheetAns = $scope.yesNo[2];
 
           //variables
+          $scope.isTattoo = false;
           ZoonosisService.getTattooClass().then(function (results){
              var data = results.data;
              $scope.data = data;
@@ -60,23 +63,37 @@ zoonosisModule.controller("dataCollectionCtrl",
              console.log(results.status);
            });
 
-           $scope.tattooChoices = [{name: "No", value : 0}, {name: "Yes", value : 1}, {name: "Yes Recaptured", value : 0}];
-           $scope.usersTattoAns = $scope.yesNo[2];
+           $scope.tattooChoices = [{name: "No", value : 0}, {name: "Yes", value : 1}];
+           $scope.usersTattoAns = null;
 
-           $scope.tattooFunc = function(){
-             if($scope.usersTattoAns.value != 0)
+           $scope.tattooFunc = function()
+           {
+             $scope.cvzCurrentNum = $scope.recaptureTattoo.CVZLabNum;
+
+           }
+
+           $scope.updateTattooValidation = function(){
+             if($scope.usersTattoAns.name == "Yes")
              {
-               //Has tattoo number recapture
-               if($scope.usersTattoAns.value == 1)
-               {
+               $scope.isTattoo = true;
+             }
+             else
+             {
+               $scope.isTattoo = false;
 
-               }
-               else
-               {
-
-               }
              }
            }
+
+           $scope.currentTattoos = null
+           ZoonosisService.getExistingTattoo().then(function (results){
+              $scope.currentTattoos = results.data;
+
+            },
+            function(results){
+           //   //on error
+              console.log(results.status);
+            });
+
 
            //Project number
           $scope.otherProjNum = null;
@@ -109,7 +126,7 @@ zoonosisModule.controller("dataCollectionCtrl",
            $scope.requiredYesNo = [{ name: "Yes", value: 1 }, { name: "No", value: 0 }];
            $scope.experiColonAns = null;
 
-           //Page 2 stuff
+           //Page 1 continue stuff
            $scope.currentSource = null;
            $scope.datepicked = null;
            $scope.currentSpecies = null;
@@ -301,7 +318,7 @@ zoonosisModule.controller("dataCollectionCtrl",
             page1Obj.CVZ_LAB_NUM = $scope.cvzCurrentNum;
             page1Obj.FIELD_SHEET = $scope.fieldSheetAns;
             page1Obj.NECROPSY_SHEET = $scope.necropsySheetAns;
-            page1Obj.TATTOO_NUM = $scope.usersTattoAns;
+            page1Obj.TATTOO_NUM = $scope.recaptureTattoo;
             page1Obj.OTHER_PROJECT_NUM = $scope.otherProjNum;
             page1Obj.MUSEUM_NUMBER = $scope.museumNum;
             page1Obj.EXPERIMENTAL_COLONY = $scope.experiColonAns;

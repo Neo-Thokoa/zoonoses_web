@@ -52,5 +52,10 @@ zoonosisModule.factory('ZoonosisService', ["$http", function ($http) {
       return $http.get(path + 'ageDB.json');
     }
 
+    factoryObj.getExistingTattoo = function()
+    {
+      return $http.get(path + 'tattooNums.json');
+    }
+
     return factoryObj;
 }]);
