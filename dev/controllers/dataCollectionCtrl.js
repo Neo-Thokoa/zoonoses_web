@@ -8,6 +8,9 @@ zoonosisModule.controller("dataCollectionCtrl",
         $scope.part2 = false;
         $scope.part3 = false;
         $scope.part4 = false;
+        $scope.part5 = false;
+        $scope.part6 = false;
+        $scope.viewPage = 1;
         //$scope.version = oiSelect.version.full;
       var page1Obj = new Object();
       var page2Obj = new Object();
@@ -54,6 +57,39 @@ zoonosisModule.controller("dataCollectionCtrl",
               $scope.incrementBar(val);
             }
           }
+
+          //Page
+          $scope.totalItems = 60;
+          $scope.maxSize = 7;
+          $scope.currentPage = 1;
+          $scope.setPage = function (pageNo) {
+            console.log("Hau");
+            // if(pageNo < $scope.currentPage)
+            // {
+            //   $scope.Back(pageNo)
+            // }
+            // else
+            // {
+            //   $scope.NextPart(pageNo);
+            // }
+            //$scope.currentPage = pageNo;
+          };
+
+          $scope.pageChanged = function()
+          {
+            console.log("Page: " + $scope.currentPage);
+            if($scope.currentPage < $scope.viewPage)
+            {
+              $scope.viewPage = $scope.currentPage;
+              $scope.Back($scope.viewPage);
+            }
+            else if($scope.currentPage > $scope.viewPage)
+            {
+              $scope.viewPage = $scope.currentPage;
+              $scope.NextPart($scope.viewPage);
+            }
+          }
+
           $rootScope.showSaver2 = true;
           $rootScope.showSaver = true;
 
@@ -358,7 +394,7 @@ zoonosisModule.controller("dataCollectionCtrl",
 
             $scope.checkSpecies = function()
             {
-              if(!speciesIncrease)
+              if(!$scope.speciesIncrease)
               {
                 $scope.speciesIncrease = true;
                 $scope.incrementBar(1);
@@ -492,6 +528,9 @@ zoonosisModule.controller("dataCollectionCtrl",
              console.log(results.status);
            });
 
+           //COMMENTS
+           $scope.currentComment = null;
+
            //Meuseum number
            $scope.museumNum = null;
            $scope.principleMuseumNum = null;
@@ -588,7 +627,7 @@ zoonosisModule.controller("dataCollectionCtrl",
             }
             if(!$scope.sheetIncrease)
             {
-              $scope.tattooIncrease(2);
+              $scope.incrementBar(2);
               $scope.sheetIncrease = true;
             }
 
@@ -636,26 +675,26 @@ zoonosisModule.controller("dataCollectionCtrl",
             page1Obj.AGE = $scope.currentAge;
 
 
-
+            page1Obj.COMMENTS = $scope.currentComment;
             page1Obj.MUSEUM_NUMBER = $scope.museumNum;
 
             }
 
              $scope.savePage2 = function () {
               $scope.Btnloader = true
-              page2Obj.SOURCE = $scope.currentSource;
-              page2Obj.DATE_COLLECTED = $scope.datepicked;
-              page2Obj.SPECIES = $scope.currentSpecies;
-              page2Obj.CONFIRM_SPEC_ID = $scope.confirmation;
-              page2Obj.LOCALITY = $scope.currentLocality;
-              page2Obj.SITE = $scope.currentSite;
-              page2Obj.PROVINCE = $scope.currentProvince;
-              page2Obj.COUNTRY = $scope.currentCountry;
-              page2Obj.DECS = $scope.currentLattitude;
-              page2Obj.DECE = $scope.currentLongitude;
-              page2Obj.COLLECTORS = $scope.currentCollectors;
-              page2Obj.SEX = $scope.currentSex;
-              page2Obj.AGE = $scope.currentAge;
+              page2Obj.ISVOUCHER = null;
+              page2Obj.WINGBIOPSY = null;
+              page2Obj.BLOOD = null;
+              page2Obj.SERUM = null;
+              page2Obj.FTABLOOD = null;
+              page2Obj.FUR = null;
+              page2Obj.PARASITE = null;
+              page2Obj.PARINETOH = null;
+              page2Obj.URINE = null;
+              page2Obj.FEACAL = null;
+              page2Obj.NA_SWAB = null;
+              page2Obj.RE_SWAB = null;
+              page2Obj.ORAL_SWAP = null;
 
               }
 
@@ -666,16 +705,21 @@ zoonosisModule.controller("dataCollectionCtrl",
                 $scope.part2 = true;
                 $scope.part3 = false;
                 $scope.part4 = false;
-                $scope.message = "Page 2/7 Description of sample.";
+                $scope.part5 = false;
+                $scope.part6 = false;
+                $scope.message = "Page 2/6 Biopsy details.";
                 $scope.feedColor = "#68831e";
                 $scope.Btnloader = false;
+
             }
             else if (pn == 3) {
                 $scope.part1 = false;
                 $scope.part2 = false;
                 $scope.part3 = true;
                 $scope.part4 = false;
-                $scope.message = "Page 3/7 Manage Voucher details.";
+                $scope.part5 = false;
+                $scope.part6 = false;
+                $scope.message = "Page 3/6 Manage Test details.";
                 $scope.feedColor = "#68831e";
                 $scope.Btnloader = false;
             }
@@ -684,19 +728,34 @@ zoonosisModule.controller("dataCollectionCtrl",
                 $scope.part2 = false;
                 $scope.part3 = false;
                 $scope.part4 = true;
-                $scope.message = "Page 4/4 Manage staff on this page. Click add to add a staff member.";
+                $scope.part5 = false;
+                $scope.part6 = false;
+                $scope.message = "Page 4/6 Manage Measurements from tests";
                 $scope.feedColor = "#68831e";
                 $scope.Btnloader = false;
             }
-            else {
-                $scope.part1 = true;
+            else if (pn == 5) {
+                $scope.part1 = false;
                 $scope.part2 = false;
                 $scope.part3 = false;
                 $scope.part4 = false;
-                $scope.message = "Page 1/4 Edit project information on this page.";
+                $scope.part5 = true;
+                $scope.part6 = false;
+                $scope.message = "Page 5/6 Manage Photos";
+                $scope.feedColor = "#68831e";
+
+            }
+            else {
+                $scope.part1 = false;
+                $scope.part2 = false;
+                $scope.part3 = false;
+                $scope.part4 = false;
+                $scope.part5 = false;
+                $scope.part6 = true;
+                $scope.message = "Page 6/6 Manage Publications and Additionals.";
                 $scope.feedColor = "#68831e";
             }
-
+                //$scope.setPage(pn);
             $scope.Btnloader = false;
 
         }
@@ -707,41 +766,55 @@ zoonosisModule.controller("dataCollectionCtrl",
                 $scope.part2 = false;
                 $scope.part3 = false;
                 $scope.part4 = false;
-                $scope.message = "Page 1/4 Add project information on this page.";
+                $scope.part5 = false;
+                $scope.part6 = false;
+                $scope.message = "Page 1/6 Sample information.";
                 $scope.feedColor = "#005bab";
             }
             else if (pn == 2) {
-                $scope.part1 = false;
-                $scope.part2 = true;
-                $scope.part3 = false;
-                $scope.part4 = false;
-                $scope.message = "Page 3/4 Manage collaborators on this page. Click add to add a collaborator.";
-                $scope.feedColor = "#68831e";
+              $scope.part1 = false;
+              $scope.part2 = true;
+              $scope.part3 = false;
+              $scope.part4 = false;
+              $scope.part5 = false;
+              $scope.part6 = false;
+              $scope.message = "Page 2/6 Biopsy details.";
+              $scope.feedColor = "#68831e";
+              $scope.Btnloader = false;
             }
             else if (pn == 3) {
-                $scope.part1 = false;
-                $scope.part2 = false;
-                $scope.part3 = true;
-                $scope.part4 = false;
-                $scope.message = "Page 4/4 Manage staff on this page. Click add to add a staff member.";
-                $scope.feedColor = "#68831e";
+              $scope.part1 = false;
+              $scope.part2 = false;
+              $scope.part3 = true;
+              $scope.part4 = false;
+              $scope.part5 = false;
+              $scope.part6 = false;
+              $scope.message = "Page 3/6 Manage Test details.";
+              $scope.feedColor = "#68831e";
+              $scope.Btnloader = false;
             }
             else if (pn == 4) {
-                $scope.part1 = false;
-                $scope.part2 = false;
-                $scope.part3 = false;
-                $scope.part4 = true;
-                $scope.message = "Page 2/4 Manage Divisions on this page. Click add to add a Division.";
-                $scope.feedColor = "#68831e";
+              $scope.part1 = false;
+              $scope.part2 = false;
+              $scope.part3 = false;
+              $scope.part4 = true;
+              $scope.part5 = false;
+              $scope.part6 = false;
+              $scope.message = "Page 4/6 Manage Measurements from tests";
+              $scope.feedColor = "#68831e";
+              $scope.Btnloader = false;
             }
             else {
-                $scope.part1 = true;
-                $scope.part2 = false;
-                $scope.part3 = false;
-                $scope.part4 = false;
-                $scope.message = "Page 1/4 Add project information on this page.";
-                $scope.feedColor = "#68831e";
+              $scope.part1 = false;
+              $scope.part2 = false;
+              $scope.part3 = false;
+              $scope.part4 = false;
+              $scope.part5 = true;
+              $scope.part6 = false;
+              $scope.message = "Page 5/6 Manage Photos";
+              $scope.feedColor = "#68831e";
             }
+              //$scope.setPage(pn);
         }
 
 
