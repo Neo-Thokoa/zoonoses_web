@@ -1,4 +1,4 @@
-var zoonosisModule = angular.module('zoonosisModule', ['ngRoute','leaflet-directive','oi.select','datepicker', 'ui.rCalendar']);
+var zoonosisModule = angular.module('zoonosisModule', ['ngRoute','leaflet-directive','oi.select','datepicker', 'ui.rCalendar', 'ui.bootstrap']);
 
 zoonosisModule.config(["$routeProvider", function($routeProvider) {
 

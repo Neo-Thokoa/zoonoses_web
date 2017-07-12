@@ -6,6 +6,9 @@
 
 <div ng-controller="dataCollectionCtrl" class="box">
 
+  <h5 id="subHeading" style="text-align: center;">Overall Progress </h5>
+  <uib-progressbar class="progress-striped active" value="dynamic" type="{{type}}"><b> {{dynamic}}%</b></uib-progressbar>
+
      <form class="form-horizontal midSection" name="PageOneForm">
 
          <!--First section of the project table-->
@@ -55,11 +58,11 @@
                      <label class="col-sm-3 control-label">Tattoo number</label>
                      <div class="col-sm-9">
                          <div>
-
+                            <!-- Check if blank -->
                            <oi-select oi-options="x.value for x in currentTattoos"
                                       ng-model="recaptureTattoo"
                                       ng-change="tattooFunc()"
-                                      required
+
                                       placeholder="Enter Tattoo number"></oi-select>
 
                             <!-- <input type="text" ng-model="selected" uib-typeahead="state for state in states | filter:$viewValue | limitTo:8" class="form-control"> -->
@@ -90,7 +93,7 @@
                      <div class="col-sm-9">
                          <div>
 
-                             <oi-select oi-options="x.name for x in yesNo"
+                             <oi-select oi-options="x.name for x in realOptions"
                                         ng-model="fieldSheetAns"
                                         placeholder="Select status"></oi-select>
 
@@ -105,7 +108,7 @@
                      <div class="col-sm-9">
                          <div>
 
-                             <oi-select oi-options="x.name for x in yesNo"
+                             <oi-select oi-options="x.name for x in realOptions"
                                         ng-model="necropsySheetAns"
                                         placeholder="Select status"></oi-select>
 
@@ -122,22 +125,11 @@
                      <label class="col-sm-3 control-label">Other Project Number</label>
                      <div class="col-sm-9">
                          <div>
-                             <input type="text" name="otherProjectNumber" class="form-control"  ng-model="otherProjNum"  maxlength="250"></input>
-                             <span class="help-block" ng-show="errorProjectTitle">{{errorOPN}}</span>
+                             <input type="text" placeholder="Enter other project number" name="otherProjectNumber" class="form-control"  ng-model="otherProjNum"  maxlength="250" ng-change="checkProjNum()"></input>
+                             <span class="help-block" ng-show="errorProjNum">{{errorOPN}}</span>
                          </div>
                      </div>
                  </div>
-
-                 <!-- Museum Number -->
-                <div id="Department-group" class="form-group">
-                    <label class="col-sm-3 control-label">Museum Number</label>
-                    <div class="col-sm-9">
-                        <div>
-                            <input type="text" name="museumNumber" class="form-control"  ng-model="museumNum"  maxlength="250"></input>
-                            <span class="help-block" ng-show="errorProjectTitle">{{errorOPN}}</span>
-                        </div>
-                    </div>
-                </div>
 
                  <!--Experimental Colony-->
                  <div id="Department-group" class="form-group">
@@ -146,25 +138,72 @@
                          <div>
 
                            <oi-select oi-options="x.name for x in requiredYesNo"
+                                       ng-change="checkColony()"
                                       ng-model="experiColonAns"
-                                      required
                                       placeholder="Indicate if live bat was taken to NCID for experimental purpose"></oi-select>
                          </div>
-                         <p id="help-block"> * Required</p>
+                         <!-- <p id="help-block"> * Required</p> -->
                      </div>
                  </div>
 
+                 <!-- source/host -->
                  <div id="Department-group" class="form-group">
                      <label class="col-sm-3 control-label">Source / Host</label>
                      <div class="col-sm-9">
                        <div>
 
-                         <oi-select oi-options="x for x in hostOptions"
+                         <oi-select oi-options="x for x in hostSourceOption"
+                                    ng-model="choosenHSType"
+                                    required
+                                      ng-change="checkHSType()"
+                                    placeholder="Source or Host"></oi-select>
+                       </div>
+                       <!-- <p id="help-block"> * Required</p> -->
+
+                     </div>
+                 </div>
+                 <div id="Department-group" class="form-group" ng-show="isSource">
+                     <label class="col-sm-3 control-label">Source</label>
+                     <div class="col-sm-9">
+                       <div>
+
+                         <!-- <oi-select oi-options="x for x in sourceOptions"
                                     ng-model="currentSource"
                                     required
-                                    placeholder="Type of bat sampled"></oi-select>
+                                    placeholder="Type of Source"></oi-select> -->
+                          <input type="text" ng-model="currentSource" uib-typeahead="state for state in sourceOptions | filter:$viewValue | limitTo:8" class="form-control" placeholder="Type of Source" typeahead-on-select='onSourceSelect($item, $model, $label)'>
                        </div>
-                       <p id="help-block"> * Required</p>
+                       <!-- <p id="help-block"> * Required</p> -->
+
+                     </div>
+                 </div>
+                 <div id="Department-group" class="form-group" ng-show="isHost">
+                     <label class="col-sm-3 control-label">Host</label>
+                     <div class="col-sm-9">
+                       <div>
+
+                         <oi-select oi-options="x for x in hostOptions"
+                                    ng-model="currentHost"
+
+                                      ng-change="checkHost()"
+                                    placeholder="Type of Host"></oi-select>
+                       </div>
+                       <!-- <p id="help-block"> * Required</p> -->
+
+                     </div>
+                 </div>
+
+                 <div id="Department-group" class="form-group" ng-show="isOtherHost">
+                     <label class="col-sm-3 control-label">Other Host</label>
+                     <div class="col-sm-9">
+                       <div>
+                         <div>
+                             <!-- <input type="text" name="otherHostName" class="form-control"  ng-model="otherHostName" required maxlength="250" ></input> -->
+                             <input type="text" ng-model="otherHostName" uib-typeahead="state for state in otherOptions | filter:$viewValue | limitTo:8" class="form-control">
+                             <span class="help-block" ng-show="errorProjNum">{{errorOPN}}</span>
+                         </div>
+                       </div>
+                       <!-- <p id="help-block"> * Required</p> -->
 
                      </div>
                  </div>
@@ -173,22 +212,17 @@
                  <div id="Department-group" class="form-group row">
                      <label class="col-sm-3 control-label">Date Collected</label>
                      <div class="col-sm-9">
-                       <div>
+                       <!-- <div>
                           <md-datepicker md-current-view="year" md-placeholder="Enter date" id="date-select-box" name="DateFrom" ng-change="dateValidatePro(project)" ng-model="project.DateFrom" ></md-datepicker>
-                      </div>
+                      </div> -->
+                      <p class="input-group">
+                        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                        <span class="input-group-btn">
+                          <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                      </p>
                      </div>
-                     <p ng-show="project.DateFrom == null" id="help-block"> * Required</p>
                  </div>
-                 <div id="Department-group" class="form-group">
-                    <label class="col-sm-3 control-label" style="color:red;"></label>
-                    <div class="col-sm-6">
-                        <div>
-                            <div ng-show="project.dateMessage" style="color:red;">{{project.dateMessage}}</div>
-
-                        </div>
-                    </div>
-
-                </div>
 
                  <!--Species-->
                  <div id="Department-group" class="form-group">
@@ -199,12 +233,14 @@
                              <oi-select oi-options="x for x in speciesTypes"
                                         ng-model="currentSpecies"
                                         ng-required
+                                          ng-change="checkSpecies()"
+
                                         placeholder="Select Species"></oi-select>
 
 
                              <span class="help-block" ng-show="errorStatus">{{errorStatus}}</span>
                          </div>
-                         <p ng-show="project.DateFrom == null" id="help-block"> * Required</p>
+                         <!-- <p ng-show="project.DateFrom == null" id="help-block"> * Required</p> -->
                      </div>
                  </div>
 
@@ -217,6 +253,8 @@
 
                            <oi-select oi-options="x for x in speciesIDoptions"
                                       ng-model="confirmation"
+                                        required
+                                      ng-change="checkIdoptions()"
                                       placeholder="Select Confirmation of Species Identification"></oi-select>
 
                            <span class="help-block" ng-show="errorStatus">{{errorStatus}}</span>
@@ -229,7 +267,8 @@
                      <label class="col-sm-3 control-label">Locality</label>
                      <div class="col-sm-9">
                          <div>
-                             <input type="text" placeholder="Indicate Locality"  ng-model="currentLocality"  typeahead="x.value for x in localDB | filter:$viewValue" class="form-control" ng-change="checkSelection()" required></input>
+                             <input type="text" placeholder="Indicate Locality" ng-model="currentLocality" uib-typeahead="state.value for state in localDB | filter:$viewValue | limitTo:8" class="form-control" ng-change="checkLocality()" required typeahead-on-select='onSelect($item, $model, $label)'>
+                             <!-- <input type="text"  ng-model="currentLocality"  typeahead="x.value for x in localDB | filter:$viewValue" class="form-control" ng-change="checkSelection()" required></input> -->
 
                          </div>
                          <!-- <p id="help-block"> * Required</p> -->
@@ -241,10 +280,10 @@
                     <label class="col-sm-3 control-label">Site</label>
                     <div class="col-sm-9">
                         <div>
-                            <input type="text" name="museumNumber" class="form-control"  ng-model="currentSite"  maxlength="250"></input>
-                            <span class="help-block" ng-show="errorProjectTitle">{{errorOPN}}</span>
+                            <input type="text" placeholder="Indicate Site" ng-model="currentSite" uib-typeahead="state for state in siteList | filter:$viewValue | limitTo:8" class="form-control" required>
+                            <!-- <input type="text" name="museumNumber" class="form-control"  ng-model="currentSite"  maxlength="250"></input> -->
                         </div>
-                        <p id="help-block"> * Required</p>
+                        <!-- <p id="help-block"> * Required</p> -->
                     </div>
 
                 </div>
@@ -260,7 +299,7 @@
                                      required
                                      placeholder="Indicate Country locality is based in"></oi-select>
                         </div>
-                        <p id="help-block"> * Required</p>
+                        <!-- <p id="help-block"> * Required</p> -->
                     </div>
                 </div>
 
@@ -268,7 +307,7 @@
                  <div id="Department-group" class="form-group">
                      <label class="col-sm-3 control-label">Province/Region</label>
                      <div class="col-sm-9">
-                         <div ng-show="isSouthAfrica">
+                         <div ng-if="isSouthAfrica">
 
                            <oi-select oi-options="x.province for x in provinceList"
                                       ng-model="currentProvince"
@@ -276,12 +315,12 @@
                                       placeholder="Indicate Province locality is based in"></oi-select>
                          </div>
 
-                             <div ng-show="!isSouthAfrica">
+                             <div ng-if="!isSouthAfrica">
                                  <input type="text" name="regionBoss" class="form-control"  ng-model="currentProvince" required maxlength="250" placeholder="Indicate Region locality is based in"></input>
                                  <span class="help-block" ng-show="errorProjectTitle">{{errorProjectTitle}}</span>
                              </div>
 
-                         <p id="help-block"> * Required</p>
+                         <!-- <p id="help-block"> * Required</p> -->
                      </div>
                  </div>
 
@@ -290,7 +329,7 @@
                      <label class="col-sm-3 control-label">Dec(S)</label>
                      <div class="col-sm-9">
                          <div>
-                             <input type="text" name="museumNumber" class="form-control"  ng-model="currentLattitude"  maxlength="250"></input>
+                             <input type="text" placeholder="Enter Lattitude co-ordinates" name="lattitude" class="form-control"  ng-model="currentLattitude"  maxlength="250" required></input>
                              <span class="help-block" ng-show="errorProjectTitle">{{errorOPN}}</span>
                          </div>
                      </div>
@@ -301,7 +340,7 @@
                      <label class="col-sm-3 control-label">Dec(E)</label>
                      <div class="col-sm-9">
                          <div>
-                             <input type="text" name="museumNumber" class="form-control"  ng-model="currentLongitude"  maxlength="250"></input>
+                             <input type="text" placeholder="Enter Longitude co-ordinates" name="longitude" class="form-control"  ng-model="currentLongitude"  maxlength="250" required></input>
                              <span class="help-block" ng-show="errorProjectTitle">{{errorOPN}}</span>
                          </div>
                      </div>
@@ -312,7 +351,8 @@
                      <label class="col-sm-3 control-label">Received from / Collectors</label>
                      <div class="col-sm-9">
                          <div>
-                             <input type="text" name="museumNumber" class="form-control"  ng-model="currentCollectors"  maxlength="250"></input>
+                             <input type="text" placeholder="Indicate Place or person from which the sample or individual was received" ng-model="currentCollectors" uib-typeahead="state for state in collectorsList | filter:$viewValue | limitTo:8" class="form-control" required>
+                             <!-- <input type="text" name="collectors" class="form-control"  ng-model="currentCollectors"  maxlength="250"></input> -->
                              <span class="help-block" ng-show="errorProjectTitle">{{errorOPN}}</span>
                          </div>
                      </div>
@@ -329,7 +369,7 @@
                                     required
                                     placeholder="Select sex of bat"></oi-select>
                        </div>
-                       <p id="help-block"> * Required</p>
+                       <!-- <p id="help-block"> * Required</p> -->
 
                      </div>
                  </div>
@@ -345,9 +385,49 @@
                                     required
                                     placeholder="Select age of bat"></oi-select>
                        </div>
-                       <p id="help-block"> * Required</p>
+                       <!-- <p id="help-block"> * Required</p> -->
                      </div>
                  </div>
+
+
+                        <!-- Museum Number -->
+                        <div id="Department-group" class="form-group">
+                            <label class="col-sm-3 control-label">Contains Museum Number</label>
+                            <div class="col-sm-9">
+                              <div>
+
+                                <oi-select oi-options="x.Name for x in modelList"
+                                           ng-model="hasMuseumNum"
+                                           required
+                                           placeholder="Select museum type sample"
+                                             ng-change="checkMuseum()"
+                                           ></oi-select>
+                              </div>
+                            </div>
+                        </div>
+
+                      <div id="Department-group" class="form-group" ng-switch="hasMuseumNum.value">
+                        <div ng-switch-when="exists">
+                          <label class="col-sm-3 control-label">Museum Number</label>
+                          <div class="col-sm-9">
+                              <div>
+                                   <input type="text" placeholder="Enter existing museum number" ng-model="museumNum" uib-typeahead="state for state in currentMuseumNums | filter:$viewValue | limitTo:8" class="form-control">
+                                  <!-- <input type="text" name="museumNumber" class="form-control"  ng-model="museumNum"  maxlength="250"></input> -->
+                                  <!-- <span class="help-block" ng-show="errorProjectTitle">{{errorOPN}}</span> -->
+                              </div>
+                          </div>
+                        </div>
+                        <div ng-switch-when="assign">
+                          <label class="col-sm-3 control-label">Museum Number</label>
+                          <div class="col-sm-9">
+                              <div>
+                                   <!-- <input type="text" placeholder="Enter existing museum number" ng-model="museumNum" uib-typeahead="state for state in currentMuseumNums | filter:$viewValue | limitTo:8" class="form-control" required> -->
+                                  <input type="text" name="museumNumber" class="form-control"  ng-model="museumNum"  maxlength="250"></input>
+                                  <!-- <span class="help-block" ng-show="errorProjectTitle">{{errorOPN}}</span> -->
+                              </div>
+                          </div>
+                        </div>
+                      </div>
 
                  <!--End of page One-->
 
@@ -865,6 +945,8 @@
 
 
       <!-- End of page 6 -->
+
+
      <div class="modal fade" id="addModal" role="dialog">
          <div class="modal-dialog modal-lg">
              <div class="modal-content">
