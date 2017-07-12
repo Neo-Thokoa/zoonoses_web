@@ -438,7 +438,9 @@ zoonosisModule.controller("dataCollectionCtrl",
               console.log("Inside onSelect");
               console.log($item);
               $scope.siteList = $item.situated.Sites;
-              $scope.currentCountry = $item.situated.Country;
+              $scope.currentCountry = {country:$item.situated.Country};
+
+
               $scope.currentLattitude = $item.situated.Dec_S;
               $scope.currentLongitude = $item.situated.Dec_E;
               $scope.isIncrement($scope.localIncrease, 3);
