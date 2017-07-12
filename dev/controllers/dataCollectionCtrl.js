@@ -439,7 +439,7 @@ zoonosisModule.controller("dataCollectionCtrl",
               console.log($item);
               $scope.siteList = $item.situated.Sites;
               $scope.currentCountry = {country:$item.situated.Country};
-
+              $scope.currentProvince =  $item.situated.provinialRegion;
 
               $scope.currentLattitude = $item.situated.Dec_S;
               $scope.currentLongitude = $item.situated.Dec_E;
@@ -534,6 +534,7 @@ zoonosisModule.controller("dataCollectionCtrl",
            $scope.currentComment = null;
 
            //Meuseum number
+           $scope.isVoucherMuseum = false;
            $scope.museumNum = null;
            $scope.principleMuseumNum = null;
            $scope.currentMuseumNums = null;
@@ -579,14 +580,17 @@ zoonosisModule.controller("dataCollectionCtrl",
               if($scope.hasMuseumNum.value == "exists")
               {
                 $scope.museumNum = null;
+                $scope.isVoucherMuseum = true;
               }
               else if($scope.hasMuseumNum.value == "assign")
               {
                 $scope.museumNum = $scope.principleMuseumNum;
+                  $scope.isVoucherMuseum = true;
               }
               else
               {
                 $scope.museumNum = null;
+                  $scope.isVoucherMuseum = false;
               }
             }
 
@@ -642,7 +646,7 @@ zoonosisModule.controller("dataCollectionCtrl",
               $scope.incrementBar(1);
             }
 
-            page1Obj.EXPERIMENTAL_COLONY = $scope.experiColonAns.value;
+          //  page1Obj.EXPERIMENTAL_COLONY = $scope.experiColonAns.value;
             if(!$scope.colonyIncrease)
             {
               $scope.colonyIncrease = true;
@@ -682,6 +686,107 @@ zoonosisModule.controller("dataCollectionCtrl",
 
             }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            //Page 2 Stuff
+
+            ZoonosisService.getBiospies().then(function (results){
+              var data = results.data
+               $scope.declare(data);
+               console.log("Page 2");
+               console.log(results.data);
+               //console.log($scope.currentMuseumNums);
+
+
+             },
+             function(results){
+            //   //on error
+               console.log(results.status);
+             });
+
+             $scope.declare = function(data)
+             {
+               $scope.currentVoucher = null;
+               $scope.currentWB = null;
+               $scope.currentBlood = null;
+               $scope.currentSerum = null;
+               $scope.currentFTA = null;
+               $scope.currentFur = null;
+               $scope.currentParasite = null;
+               $scope.currentPar = null;
+               $scope.currentUrine = null;
+               $scope.currentFeacal = null;
+               $scope.currentNASwab = null;
+               $scope.currentRESwab = null;
+               $scope.currentOralSwab = null;
+               $scope.resultBiopsyDB = data;
+               //1 Voucher
+               $scope.handleVoucherInfo(data[0]);
+             }
+
+             $scope.currentVoucherOptions = [null, null, null, null];
+             $scope.currentBiopsies = null;
+             $scope.addToCurrentStack = function(text)
+             {
+               if(text)
+               {
+
+                  $scope.currentBiopsies.push(text);
+               }
+             }
+             $scope.handleVoucherInfo = function(info)
+             {
+               $scope.currentVoucher = info;
+               var r = 0;
+               for(r = 0; r < info.qualities.length; r++)
+               {
+                 $scope.currentVoucherOptions[r] = info.qualities[r];
+               }
+
+             }
+
+             $scope.checkingVoucher = function()
+             {
+               console.log($scope.currentVoucherOptions);
+             }
+
+             $scope.checkingBiopsy = function(index)
+             {
+               console.log("Biopsy index: +" );
+               console.log(index);
+               console.log($scope.currentBiopsies)
+             }
+
+             $scope.addBiopsy = function(index)
+             {
+               console.log("index is");
+               console.log(index);
+               $scope.resultBiopsyDB[index].selected = true;
+               if($scope.currentBiopsies == null )
+               {
+                 $scope.currentBiopsies = [{title: $scope.resultBiopsyDB[index].title, selected: true, isMuseum: false, qualities: $scope.resultBiopsyDB[index].qualities}];
+               }
+               else
+               {
+                 $scope.addToCurrentStack($scope.resultBiopsyDB[index]);
+               }
+
+             }
+
+             $scope.status = {
+                isopen: false
+              };
+
+              $scope.toggleDropdown = function($event) {
+                $event.preventDefault();
+                $event.stopPropagation();
+                $scope.status.isopen = !$scope.status.isopen;
+              };
+
+              $scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
+
              $scope.savePage2 = function () {
               $scope.Btnloader = true
               page2Obj.ISVOUCHER = null;
@@ -712,7 +817,7 @@ zoonosisModule.controller("dataCollectionCtrl",
                 $scope.message = "Page 2/6 Biopsy details.";
                 $scope.feedColor = "#68831e";
                 $scope.Btnloader = false;
-
+                $scope.currentPage = 2;
             }
             else if (pn == 3) {
                 $scope.part1 = false;
@@ -724,6 +829,7 @@ zoonosisModule.controller("dataCollectionCtrl",
                 $scope.message = "Page 3/6 Manage Test details.";
                 $scope.feedColor = "#68831e";
                 $scope.Btnloader = false;
+                $scope.currentPage = 3;
             }
             else if (pn == 4) {
                 $scope.part1 = false;
@@ -735,6 +841,7 @@ zoonosisModule.controller("dataCollectionCtrl",
                 $scope.message = "Page 4/6 Manage Measurements from tests";
                 $scope.feedColor = "#68831e";
                 $scope.Btnloader = false;
+                $scope.currentPage = 4;
             }
             else if (pn == 5) {
                 $scope.part1 = false;
@@ -745,6 +852,7 @@ zoonosisModule.controller("dataCollectionCtrl",
                 $scope.part6 = false;
                 $scope.message = "Page 5/6 Manage Photos";
                 $scope.feedColor = "#68831e";
+                $scope.currentPage = 5;
 
             }
             else {
@@ -756,6 +864,7 @@ zoonosisModule.controller("dataCollectionCtrl",
                 $scope.part6 = true;
                 $scope.message = "Page 6/6 Manage Publications and Additionals.";
                 $scope.feedColor = "#68831e";
+                $scope.currentPage = 6;
             }
                 //$scope.setPage(pn);
             $scope.Btnloader = false;
@@ -772,6 +881,8 @@ zoonosisModule.controller("dataCollectionCtrl",
                 $scope.part6 = false;
                 $scope.message = "Page 1/6 Sample information.";
                 $scope.feedColor = "#005bab";
+
+                $scope.currentPage = 1;
             }
             else if (pn == 2) {
               $scope.part1 = false;
@@ -783,6 +894,8 @@ zoonosisModule.controller("dataCollectionCtrl",
               $scope.message = "Page 2/6 Biopsy details.";
               $scope.feedColor = "#68831e";
               $scope.Btnloader = false;
+
+              $scope.currentPage = 2;
             }
             else if (pn == 3) {
               $scope.part1 = false;
@@ -794,6 +907,8 @@ zoonosisModule.controller("dataCollectionCtrl",
               $scope.message = "Page 3/6 Manage Test details.";
               $scope.feedColor = "#68831e";
               $scope.Btnloader = false;
+
+              $scope.currentPage = 3;
             }
             else if (pn == 4) {
               $scope.part1 = false;
@@ -805,6 +920,8 @@ zoonosisModule.controller("dataCollectionCtrl",
               $scope.message = "Page 4/6 Manage Measurements from tests";
               $scope.feedColor = "#68831e";
               $scope.Btnloader = false;
+
+              $scope.currentPage = 4;
             }
             else {
               $scope.part1 = false;
@@ -815,6 +932,7 @@ zoonosisModule.controller("dataCollectionCtrl",
               $scope.part6 = false;
               $scope.message = "Page 5/6 Manage Photos";
               $scope.feedColor = "#68831e";
+              $scope.currentPage = 5;
             }
               //$scope.setPage(pn);
         }

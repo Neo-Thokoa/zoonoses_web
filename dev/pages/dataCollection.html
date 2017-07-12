@@ -20,7 +20,7 @@
                          <img class="img-responsive" src="img/icons/projects-icon-128px.png" />
                      </i>
                  </div>
-                 <h4 id="h5">Data gathering</h4>
+                 <h4 id="h5">Sample Wizard</h4>
                  <hr />
              </div>
 
@@ -80,7 +80,7 @@
                      <label class="col-sm-3 control-label">CVZ Laboratory Number</label>
                      <div class="col-sm-9">
                          <div>
-                             <input type="text" name="projectTitle" class="form-control"  ng-model="cvzCurrentNum" required maxlength="250" disabled></input>
+                             <input type="text" name="projectTitle" class="form-control"  ng-model="cvzCurrentNum" required maxlength="250" ></input>
                              <span class="help-block" ng-show="errorProjectTitle">{{errorProjectTitle}}</span>
                          </div>
 
@@ -428,6 +428,7 @@
                                   <!-- <span class="help-block" ng-show="errorProjectTitle">{{errorOPN}}</span> -->
                               </div>
                           </div>
+
                         </div>
                         <div ng-switch-when="assign">
                           <label class="col-sm-3 control-label">Museum Number</label>
@@ -438,6 +439,38 @@
                                   <!-- <span class="help-block" ng-show="errorProjectTitle">{{errorOPN}}</span> -->
                               </div>
                           </div>
+                        </div>
+                      </div>
+
+                      <div id="Department-group" class="form-group" ng-if="isVoucherMuseum">
+                        <div ng-repeat="vouchers in resultBiopsyDB">
+                              <hr />
+
+                              <!--<input type="button" data-role="none" ng-click="removeCollab(Pcollaborators, $event)" value="remove">-->
+                              <table ng-if="vouchers.isMuseum" class="table table-striped table-hover table-bordered col-sm-9">
+                                <thead>
+                                  <tr>
+                                    <th colspan="{{vouchers.qualities.length}}">{{vouchers.title}}</th>
+                                  </tr>
+
+                                    <tr>
+                                      <th ng-repeat="x in vouchers.qualities">{{x.heading}}</th>
+                                    </tr>
+
+                                </thead>
+                                <tbody>
+
+                                  <tr >
+                                    <td ng-repeat="y in vouchers.qualities" align="center">
+                                       <input type="checkbox" ng-model="currentVoucherOptions[$index].value" ng-change="checkingVoucher()"/></td>
+                                    </td>
+                                  </tr>
+
+
+                              </table>
+
+
+
                         </div>
                       </div>
 
@@ -480,7 +513,7 @@
                           <img class="img-responsive" src="img/icons/projects-icon-128px.png" />
                       </i>
                   </div>
-                  <h4 id="h5">Data gathering</h4>
+                  <h4 id="h5">Sample Wizard</h4>
                   <hr />
               </div>
 
@@ -491,108 +524,51 @@
 
 
 
-
-
-
-
                   <h5 id="subHeading">Biopsy</h5>
                   <hr />
 
-                  <div ng-repeat="Pcollaborators in colaborationsCls.colaborationsObjArr">
+
+                  <div class="btn-group" uib-dropdown keyboard-nav>
+                      <button id="simple-btn-keyboard-nav" type="button" class="btn btn-primary" uib-dropdown-toggle>
+                          Add Biopsy <span class="glyphicon glyphicon-plus"></span>
+                      </button>
+                      <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="simple-btn-keyboard-nav">
+                          <li ng-repeat="bio in resultBiopsyDB" ng-if="!bio.isMuseum" role="menuitem"><a href="" ng-click="addBiopsy($index)">{{bio.title}}</a></li>
+                      </ul>
+                  </div>
+                  <div ng-repeat="Pcollaborators in resultBiopsyDB">
                         <hr />
 
-
-                        <div class="plusAndMinus">
-                            <span ng-hide="!Pcollaborators.active" ng-click="Pcollaborators.active = !Pcollaborators.active" id="plusMinus" class="glyphicon glyphicon-minus-sign"></span>
-                            <span ng-hide="Pcollaborators.active" ng-click="Pcollaborators.active = !Pcollaborators.active" id="plusMinus" class="glyphicon glyphicon-plus-sign"></span>
-                        </div>
-
-                        <div id="Department-group" class="form-group">
-                            <label class="col-sm-3 control-label">Collaborator</label>
-                            <div class="col-sm-6">
-                                <div>
-                                    <oi-select oi-options="x.Initials + ' '+ x.Name +' '+ x.Surname for x in Pcollaborators.CollaboratorsArr"
-                                               ng-model="Pcollaborators.Collaborator"
-                                               ng-required="true"
-                                               ng-change="dateValidate1(Pcollaborators); changeCollab()"
-                                               placeholder="Select Collaborator"></oi-select>
-                                </div>
-                                <div class="institutionButtons">
-                                    <button ng-show="Pcollaborators.active" type="button" class="btn btn-link" ng-click="addModal('collaborator', Pcollaborators)">Collaborator not here?</button>
-                                </div>
-                                <br />
-                            </div>
-                            <p ng-show="Pcollaborators.Collaborator == null" id="help-block"> * Required</p>
-                        </div>
-
-                        <div ng-show="Pcollaborators.active">
-
-                            <div id="Department-group" class="form-group">
-                                <label class="col-sm-3 control-label" style="color:red;"></label>
-                                <div class="col-sm-6">
-                                    <div>
-                                        <div ng-show="Pcollaborators.dateMessage" style="color:red;">{{Pcollaborators.dateMessage}}</div>
-                                        <p ng-show="ResearchProjectForm3.Pcollaborators.DateFrom.$invalid" id="help-block"> * Required</p>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <!--Project Role-->
-                            <div id="Department-group" class="form-group">
-                                <label class="col-sm-3 control-label">Project Role</label>
-                                <div class="col-sm-6">
-                                    <div>
-                                        <oi-select oi-options="x.PR_Description for x in ProjectRoleArr"
-                                                   ng-model="Pcollaborators.ProjectRole"
-                                                   ng-required="true"
-                                                   ng-change="dateValidate1(Pcollaborators)"
-                                                   placeholder="Select project role"></oi-select>
-                                    </div>
-                                </div>
-                                <p ng-show="Pcollaborators.ProjectRole == null" id="help-block"> * Required</p>
-                            </div>
-
-
-                            <!--Colaboration status-->
-                            <div id="Department-group" class="form-group">
-                                <label class="col-sm-3 control-label">Collaboration status</label>
-                                <div class="col-sm-6">
-                                    <div>
-                                        <oi-select name="ColaborationStatus" ng-change="dateValidate1(Pcollaborators)" ng-model="Pcollaborators.ColaborationStatus" oi-options="x.CS_Description for x in ColaborationStatusArr"
-                                                   placeholder="Select Status"
-                                                   required>
-                                        </oi-select>
-                                    </div>
-                                </div>
-                                <p ng-show="Pcollaborators.ColaborationStatus == null" id="help-block"> * Required</p>
-                            </div>
-
-                            <!--Colaboration type-->
-                            <div id="Department-group" class="form-group">
-                                <label class="col-sm-3 control-label">Project type</label>
-                                <div class="col-sm-6">
-                                    <div>
-                                        <oi-select name="ColaborationType" ng-change="dateValidate1(Pcollaborators)" ng-model="Pcollaborators.ColaborationType" oi-options="x.CT_Description for x in ColaborationTypeArr"
-                                                   required
-                                                   placeholder="Select Collaboration Type">
-                                        </oi-select>
-                                    </div>
-                                </div>
-                                <p ng-show="Pcollaborators.ColaborationType == null" id="help-block"> * Required</p>
-                            </div>
-
-                        </div>
-
                         <!--<input type="button" data-role="none" ng-click="removeCollab(Pcollaborators, $event)" value="remove">-->
-                        <button type="button" class="btn btn-link" ng-click="removeCollab(Pcollaborators, $event); changeCollab()">Remove <span title="remove collaborator" class="glyphicon glyphicon-trash"></span></button>
+                        <!-- <button type="button" class="btn btn-link col-sm-3" ng-click="removeCollab(Pcollaborators, $event); changeCollab()">Remove Wing Biopsy <span title="remove collaborator" class="glyphicon glyphicon-trash"></span></button> -->
+
+                        <table ng-if="Pcollaborators.selected" class="table table-striped table-hover table-bordered col-sm-9">
+                          <thead>
+                            <tr>
+                              <th colspan="{{Pcollaborators.qualities.length}}">{{Pcollaborators.title}}</th>
+                            </tr>
+
+                              <tr>
+                                <th ng-repeat="x in Pcollaborators.qualities">{{x.heading}}</th>
+                              </tr>
+
+                          </thead>
+                          <tbody>
+
+                            <tr >
+                              <td ng-repeat="y in Pcollaborators.qualities" align="center">
+                                 <input type="checkbox" ng-model="y.value" ng-change="checkingBiopsy(y)"/></td>
+                              </td>
+
+                            </tr>
+
+                          </tbody>
+                        </table>
 
 
-                        <!--<input type="button" data-role="none" ng-click="addCollab()" value="Add Collaborator">-->
 
-                    </div>
+                  </div>
 
-                    <button type="button" class="btn btn-link" ng-click="addCollab()" ng-disabled="ResearchProjectForm3.$invalid">Add <span title="add collaborator" class="glyphicon glyphicon-plus"></span></button>
 
                   <!--End of page Two-->
 

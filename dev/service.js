@@ -57,5 +57,10 @@ zoonosisModule.factory('ZoonosisService', ["$http", function ($http) {
       return $http.get(path + 'tattooNums.json');
     }
 
+    factoryObj.getBiospies = function()
+    {
+      return $http.get(path + 'biopsies.json');
+    }
+
     return factoryObj;
 }]);
