@@ -1,37 +1,133 @@
-<div ng-include="url.templateUrl" style="display:inline;"></div>
-<br/>
-<br/>
-<br/>
-<div class="w3-display-container">
-<div class="row" style="padding-right: 20px; padding-left: 20px">
+<div ng-include="url.templateUrl" style="display:inline;" ng-init="page = 'project'"></div>
+<div ng-controller="findingsCtrl" class="box">
 
-	<div class="col-md-6">
-	  		<leaflet center="SouthAfrica" event-broadcast="events"  paths="paths" markers="markers" maxbounds="maxbounds" defaults="defaults" height="450px"></leaflet>
-	</div>
-	<div  class="col-md-6">
+    <!--<div id="messages" ng-model="message" ng-show="message">{{message}}</div>-->
+    <!--     <form ng-submit="ProcessForm()"> -->
+    <form class="form-horizontal midSection" name="projectForm">
+        <div class="bs-docs-section">
 
-	<div class="w3-display-container w3-red" style="height: 70px;">
-	<div class="" style="text-align: center;padding-top: 12px">
-		Select your desired route by clicking on the green path on the map or manualy selecting your destination points.
-	 </div>
-	</div>
+            <!-- PAGE HEADER -->
+            <div>
+                <div class="section-icon">
+                    <i class="">
+                        <img class="img-responsive" src="../../../Content/images/NewIcons/projects-icon-128px.png" />
+                    </i>
+                </div>
+                <h4 id="h5">Research Projects</h4>
+                <hr />
+            </div>
 
-		       <div class="inputArea">
-	                        <label>Destination A</label>
-	                        <oi-select class="inputs" style="text-align:left" ng-change="checkValidate()" oi-options="x.name for x in departurePoints" ng-model="pointA" placeholder="Click to select point A">
-	                        </oi-select>                        
-	             </div>
-	             <div class="inputArea">
-	                        <label>Destination B</label>
-	                        <oi-select class="inputs" style="text-align:left" ng-change="checkValidate()" oi-options="x.name for x in departurePoints" ng-model="pointB" placeholder="Click to select point B">
-	                        </oi-select>                        
-	             </div>
-	             <p ng-show="validEq" style="color: red;">Please make sure that the depature point is different from the destination point</p>
+            <div class="innerSection">
+                <!-- USER FEEDBACK -->
+                <div class="messages" ng-model="message" ng-show="message" style="border-color:{{feedColor}}">{{message}}</div>
+
+                <h5 id="subHeading">Search Projects</h5>
+                <hr />
+                <div style="display:inline">
+                    <nit-advanced-searchbox ng-model="searchParams"
+                                            parameters="availableSearchParams"
+                                            placeholder="Search..." id="searchSection">
+                    </nit-advanced-searchbox>
+                </div>
+
+                <h5 id="subHeading">Projects</h5>
+                <hr />
+
+                <div ng-show="!loader" style="position: relative">
+                    <div class="loading-icon">
+                        <span class="loader"><span class="loader-inner"></span></span>
+                        <label class="loadingText">Loading. Please be patient.</label>
+                    </div>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                </div>
+
+                <div ng-show="loader">
+                <div class="tableButtons">
+                    <button type="button" ng-disabled="filteredItems.length == 0" class="btn btn-block btn-primary" ng-click="Export()"><span class="glyphicon glyphicon-download"></span> Export To Excel</button>
+                </div>
+                <div ng-show="Auth.ProjectAdd" class="tableButtons">
+                    <button type="button" class="btn btn-block btn-primary" ng-click="add()"><span class="glyphicon glyphicon-plus-sign"></span> Add New Project</button>
+                </div>
+                <table class="table table-hover table-bordered table-striped" style="background-color:white;">
+                    <thead>
+                        <tr>
+                            <th>Project Title</th>
+                            <th>Divisions</th>
+                            <!--<th>Head Collaborator</th>-->
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr dir-paginate="x in (filteredItems = ( projects | filter : searchParams.query |filter : {ProjectTitle:searchParams.ProjectTitle, status : searchParams.status,divisions: {name: searchParams.divisions}})) |itemsPerPage:8">
+                            <td>
+                                {{x.ProjectTitle}}
+                            </td>
+                            <td>
+                                <div ng-repeat="p in x.divisions">
+                                    <div style="display:inline">{{p.type}}</div>: <div style="display:inline">{{p.name}}</div>
+                                </div>
+                            </td>
+                            <!--<td>
+                        {{x.RI_ID}}
+                    </td>-->
+                            <td>
+                                {{x.status}}
+                            </td>
+                            <td class="threeButtons" >
+                                <!--style="width:195px"-->
+                                <button ng-show="Auth.ProjectEdit" type="button" class="btn btn-link spacer" ng-click="edit(x.ProjectID)"><span title="edit project" class="glyphicon glyphicon-pencil"></span></button>
+                                <button type="button" class="btn btn-link spacer" ng-click="view(x.ProjectID)"><span title="view project" class="glyphicon glyphicon-eye-open"></span></button>
+                                <button ng-show="Auth.ProjectDelete" type="button" class="btn btn-link spacer" ng-click="deleteItem(x.ProjectID)"><span title="delete project" class="glyphicon glyphicon-trash"></span></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                    <center>
+                        <dir-pagination-controls class="paginationCtrls" max-size="5"
+                                                 direction-links="true"
+                                                 boundary-links="true">
+                        </dir-pagination-controls>
+                    </center>
+
+                    </div>
 
 
- <br/>
- <button class="w3-btn w3-red" ng-disabled="!pointA || !pointB || validEq" ng-click="book()">Book</button>
-	</div>
-</div>
+                <div class="saveButton">
+                    <button type="button" class="btn btn-block btn-primary" ng-click="Back()">
+                        <span class="glyphicon glyphicon-arrow-left"></span> Back
+                    </button>
+                </div>
+                <br />
+                <br />
+                <br />
+
+            </div>
+            </div>
+    </form>
+
+    <div class="modal fade" id="deleteModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:#005bab; color:white;">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id="headMess">{{headM}}</h4>
+                </div>
+                <div class="modal-body">
+                    <p id="retMess">{{retM}}</p>
+                </div>
+                <div class="modal-footer">
+                    <div>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="delete()">Yes</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
