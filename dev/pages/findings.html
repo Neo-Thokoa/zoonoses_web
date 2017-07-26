@@ -1,37 +1,29 @@
-<div ng-include="url.templateUrl" style="display:inline;" ng-init="page = 'project'"></div>
+<div ng-include="url.templateUrl" style="display:inline;"></div>
+<br/>
+<br/>
+<br/>
+
 <div ng-controller="findingsCtrl" class="box">
 
     <!--<div id="messages" ng-model="message" ng-show="message">{{message}}</div>-->
     <!--     <form ng-submit="ProcessForm()"> -->
-    <form class="form-horizontal midSection" name="projectForm">
-        <div class="bs-docs-section">
+    <form class="form-horizontal midSection"  name="projectForm">
+        <div class="bs-docs-section" ng-if="isAdmin">
 
             <!-- PAGE HEADER -->
             <div>
                 <div class="section-icon">
                     <i class="">
-                        <img class="img-responsive" src="../../../Content/images/NewIcons/projects-icon-128px.png" />
+                        <img class="img-responsive" src="img/icons/projects-icon-128px.png" />
                     </i>
                 </div>
-                <h4 id="h5">Research Projects</h4>
+                <h4 id="h5">Admin functions</h4>
                 <hr />
             </div>
 
             <div class="innerSection">
                 <!-- USER FEEDBACK -->
-                <div class="messages" ng-model="message" ng-show="message" style="border-color:{{feedColor}}">{{message}}</div>
-
-                <h5 id="subHeading">Search Projects</h5>
-                <hr />
-                <div style="display:inline">
-                    <nit-advanced-searchbox ng-model="searchParams"
-                                            parameters="availableSearchParams"
-                                            placeholder="Search..." id="searchSection">
-                    </nit-advanced-searchbox>
-                </div>
-
-                <h5 id="subHeading">Projects</h5>
-                <hr />
+                <!-- <div class="messages" ng-model="message" ng-show="message" style="border-color:{{feedColor}}">{{message}}</div> -->
 
                 <div ng-show="!loader" style="position: relative">
                     <div class="loading-icon">
@@ -45,89 +37,72 @@
                 </div>
 
                 <div ng-show="loader">
+
+                  <h5 id="subHeading">Search Admin Functions</h5>
+                  <!-- <div style="display:inline">
+                      <nit-advanced-searchbox ng-model="searchParams"
+                                              parameters="availableSearchParams"
+                                              placeholder="Search..." id="searchSection">
+                      </nit-advanced-searchbox>
+                  </div> -->
+
+                  <div ng-dropdown-multiselect="" options="getAdminData" selected-model="dbmodel" extra-settings="example9settings" style="width : 100% !important"></div>
+                  <h5 id="subHeading">Admin Table</h5>
                 <div class="tableButtons">
-                    <button type="button" ng-disabled="filteredItems.length == 0" class="btn btn-block btn-primary" ng-click="Export()"><span class="glyphicon glyphicon-download"></span> Export To Excel</button>
+                    <button type="button" class="btn btn-block btn-primary" ng-click="add()"><span class="glyphicon glyphicon-plus-sign"></span> Add To Database</button>
                 </div>
-                <div ng-show="Auth.ProjectAdd" class="tableButtons">
-                    <button type="button" class="btn btn-block btn-primary" ng-click="add()"><span class="glyphicon glyphicon-plus-sign"></span> Add New Project</button>
-                </div>
-                <table class="table table-hover table-bordered table-striped" style="background-color:white;">
+                <table class="table table-hover table-bordered table-striped animate-if" style="background-color:white;" ng-if="dbmodel.length != 0">
                     <thead>
                         <tr>
-                            <th>Project Title</th>
-                            <th>Divisions</th>
+                            <th>Column</th>
+                            <th>Attributes</th>
                             <!--<th>Head Collaborator</th>-->
-                            <th>Status</th>
+
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr dir-paginate="x in (filteredItems = ( projects | filter : searchParams.query |filter : {ProjectTitle:searchParams.ProjectTitle, status : searchParams.status,divisions: {name: searchParams.divisions}})) |itemsPerPage:8">
-                            <td>
-                                {{x.ProjectTitle}}
+                        <tr ng-repeat="v in getAdminData">
+                            <td ng-if="dbmodel.indexOf(v) >= 0">
+                                {{v.Description}}
                             </td>
-                            <td>
-                                <div ng-repeat="p in x.divisions">
-                                    <div style="display:inline">{{p.type}}</div>: <div style="display:inline">{{p.name}}</div>
+                            <td ng-if="dbmodel.indexOf(v) >= 0">
+                                <div ng-repeat="x in sexOptions">
+                                    <div style="display:inline">{{x.sex}}</div>: <div style="display:inline">{{x.value}}</div>
                                 </div>
                             </td>
                             <!--<td>
                         {{x.RI_ID}}
                     </td>-->
-                            <td>
-                                {{x.status}}
-                            </td>
-                            <td class="threeButtons" >
+
+                            <td class="threeButtons" ng-if="dbmodel.indexOf(v) >= 0">
                                 <!--style="width:195px"-->
-                                <button ng-show="Auth.ProjectEdit" type="button" class="btn btn-link spacer" ng-click="edit(x.ProjectID)"><span title="edit project" class="glyphicon glyphicon-pencil"></span></button>
-                                <button type="button" class="btn btn-link spacer" ng-click="view(x.ProjectID)"><span title="view project" class="glyphicon glyphicon-eye-open"></span></button>
-                                <button ng-show="Auth.ProjectDelete" type="button" class="btn btn-link spacer" ng-click="deleteItem(x.ProjectID)"><span title="delete project" class="glyphicon glyphicon-trash"></span></button>
+                                <button type="button" class="btn btn-link spacer" ng-click="edit(v.ID)"><span title="edit function" class="glyphicon glyphicon-pencil"></span></button>
+                                <button type="button" class="btn btn-link spacer" ng-click="view(v.ID)"><span title="view function" class="glyphicon glyphicon-eye-open"></span></button>
+                                <button type="button" class="btn btn-link spacer" ng-click="deleteItem(v.ID)"><span title="delete function" class="glyphicon glyphicon-trash"></span></button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
 
-                    <center>
-                        <dir-pagination-controls class="paginationCtrls" max-size="5"
-                                                 direction-links="true"
-                                                 boundary-links="true">
-                        </dir-pagination-controls>
-                    </center>
+                <center>
+                    <dir-pagination-controls class="paginationCtrls" max-size="5"
+                                             direction-links="true"
+                                             boundary-links="true">
+                    </dir-pagination-controls>
+                </center>
 
                     </div>
 
 
-                <div class="saveButton">
+                <div class="saveButton adminBack">
                     <button type="button" class="btn btn-block btn-primary" ng-click="Back()">
                         <span class="glyphicon glyphicon-arrow-left"></span> Back
                     </button>
                 </div>
-                <br />
-                <br />
-                <br />
 
             </div>
             </div>
     </form>
-
-    <div class="modal fade" id="deleteModal" role="dialog">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header" style="background-color:#005bab; color:white;">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title" id="headMess">{{headM}}</h4>
-                </div>
-                <div class="modal-body">
-                    <p id="retMess">{{retM}}</p>
-                </div>
-                <div class="modal-footer">
-                    <div>
-                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="delete()">Yes</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
 </div>

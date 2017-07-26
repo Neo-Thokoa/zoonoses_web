@@ -62,5 +62,10 @@ zoonosisModule.factory('ZoonosisService', ["$http", function ($http) {
       return $http.get(path + 'biopsies.json');
     }
 
+    factoryObj.getDBList = function()
+    {
+      return $http.get(path + 'adminFunc.json');
+    }
+
     return factoryObj;
 }]);

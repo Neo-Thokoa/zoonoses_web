@@ -1,0 +1,22 @@
+[
+  {
+    "ID" : 1,
+    "Description" : "Sex Obj"
+  },
+  {
+    "ID" : 2,
+    "Description" : "Age Obj"
+  },
+  {
+    "ID" : 3,
+    "Description" : "Species Obj"
+  },
+  {
+    "ID" : 4,
+    "Description" : "Province Obj"
+  },
+  {
+    "ID" : 5,
+    "Description" : "Locality Obj"
+  }
+]

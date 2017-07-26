@@ -1,0 +1,233 @@
+﻿<div ng-controller="RegistrationCtrl" class="box">
+    <!--<div id="messages" ng-model="message" ng-show="message">{{message}}</div>-->
+
+    <div ng-show="notDone">
+        <form class="form-horizontal midSection" name="StaffForm">
+
+            <!-- PAGE HEADER -->
+            <div class="page-section-header">
+                <div class="section-icon">
+                    <i class=""><img src="app/partials/favicon.ico" alt="Smiley face" height="18" width="18" style="display:inline; margin:inherit;"></i>
+                </div>
+                <h4 id="h5">Registration Page</h4>
+            </div>
+            <div class="innerSection">
+                <!-- USER FEEDBACK -->
+                <div class="messages" ng-model="message" ng-show="message" style="border-color:{{feedColor}}">{{message}}</div>                
+
+
+                <h5 id="subHeading">Member Information</h5>
+                <hr />
+
+
+                <!--<div class="col-md-6 col-md-offset-1">-->
+                    <!--<h2>Register</h2>-->
+
+                    <!--Title-->
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Title</label>
+                        <div class="col-sm-9">
+                            <div>
+                                <!--<input type="text" name="title" class="form-control" placeholder="" ng-model="title" required></input>-->
+                                <oi-select id="title-select-box" placeholder="Title" name="title" ng-model="Title" oi-options="x.TitleDescription for x in titlesArr | orderBy: 'TitleDescription' " required>
+                                </oi-select>
+                                <span class="help-block" ng-show="errorTitle">{{errorTitle}}</span>
+                            </div>
+                            <p ng-show="StaffForm.title.$invalid" id="help-block"> * Required</p>
+                        </div>
+                    </div>
+                    <!--Initials-->
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Initials</label>
+                        <div class="col-sm-9">
+                            <div>
+                                <input type="text" placeholder="Initials" name="initials" class="form-control" ng-model="Initials" required maxlength="10" />
+                                <span class="help-block" ng-show="errorInitials">{{errorInitials}}</span>
+                            </div>
+                            <p ng-show="StaffForm.initials.$invalid" id="help-block"> * Required</p>
+                        </div>
+                    </div>
+                    <!--Name-->
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Name</label>
+                        <div class="col-sm-9">
+                            <div>
+                                <input type="text" placeholder="Name" name="name" class="form-control" ng-model="Name" required maxlength="250" />
+                                <span class="help-block" ng-show="errorSurname">{{errorSurname}}</span>
+                            </div>
+                            <p ng-show="StaffForm.name.$invalid" id="help-block"> * Required</p>
+                        </div>
+                    </div>
+                    <!--Surname-->
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Surname</label>
+                        <div class="col-sm-9">
+                            <div>
+                                <input type="text" placeholder="Surname" name="surname" class="form-control" ng-model="Surname" required maxlength="100" />
+                                <span class="help-block" ng-show="errorSurname">{{errorSurname}}</span>
+                            </div>
+                            <p ng-show="StaffForm.surname.$invalid" id="help-block"> * Required</p>
+                        </div>
+                    </div>
+                    <!--Staff Position-->
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Select Staff Position</label>
+                        <div class="col-sm-9">
+                            <div>
+                                <oi-select name="position" placeholder="Staff Position" ng-model="staffPosition" ng-change="getStaffPositions()" oi-options="x.SP_Description for x in staffPositionArr | orderBy:'SP_Description'  track by x.SP_ID" required>
+                                </oi-select>
+                                <span class="help-block" ng-show="errorTitle">{{errorTitle}}</span>
+                            </div>
+                            <p ng-show="StaffForm.position.$invalid" id="help-block"> * Required</p>
+                        </div>
+                    </div>
+                    <!--Division Type Dropdown-->
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Select Division Type</label>
+                        <div class="col-sm-9">
+                            <div>
+                                <oi-select name="divisionType" placeholder="Select Division Type" ng-model="divisionType" ng-change="getDivisions()" oi-options="x.DT_Name for x in divisionTypes | orderBy:'DT_Name'  track by x.DT_ID" required>
+                                </oi-select>
+                                <span class="help-block" ng-show="errorTitle">{{errorTitle}}</span>
+                            </div>
+                            <p ng-show="StaffForm.divisionType.$invalid" id="help-block"> * Required</p>
+                        </div>
+                    </div>
+                    <!--Division Dropdown-->
+                    <div class="form-group" ng-show="divisionType">
+                        <label class="col-sm-3 control-label">Select Division</label>
+                        <div class="col-sm-9">
+                            <div>
+                                <oi-select name="division" placeholder="Select Division" ng-model="division" oi-options="x.DivisionName for x in divisionArr | orderBy:'DivisionName'  track by x.DivisionID" required>
+                                </oi-select>
+                                <span class="help-block" ng-show="errorTitle">{{errorTitle}}</span>
+                            </div>
+                            <p ng-show="StaffForm.division.$invalid" id="help-block"> * Required</p>
+                        </div>
+                    </div>
+                    <!--Appointment Dropdown-->
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Select Appointment Type</label>
+                        <div class="col-sm-9">
+                            <div>
+                                <oi-select name="appointmentType" placeholder="Select Apointment Type" ng-model="appointmentType" oi-options="x.AT_Description for x in appointmentTypes | orderBy: 'AT_Description' track by x.AT_ID" required>
+                                </oi-select>
+                                <span class="help-block" ng-show="errorTitle">{{errorTitle}}</span>
+                            </div>
+                            <p ng-show="StaffForm.appointmentType.$invalid" id="help-block"> * Required</p>
+                        </div>
+                    </div>
+                    <!--///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+                    <!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+                    <!--Staff Number-->
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Staff Number</label>
+                        <div class="col-sm-9">
+                            <div>
+                                <input type="text" placeholder="Staff Number" name="StaffNumber" class="form-control" ng-blur="entered()" ng-model="StaffNumber" required maxlength="100" />
+                                <span class="help-block" ng-show="errorStaffNumber">{{errorStaffNumber}}</span>
+                            </div>
+                            <p ng-show="StaffForm.StaffNumber.$invalid" id="help-block"> * Required</p>
+                        </div>
+                    </div>
+
+                    <!--Role Dropdown-->
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Role</label>
+                        <div class="col-sm-9">
+                            <div>
+                                <oi-select name="Role" placeholder="Select Role" ng-model="Role" oi-options="x.RoleDescription for x in RolesArray |orderBy:'RoleDescription' " required>
+                                </oi-select>
+                                <span class="help-block" ng-show="errorRole">{{errorRole}}</span>
+                            </div>
+                            <p ng-show="StaffForm.Role.$invalid" id="help-block"> * Required</p>
+                        </div>
+                    </div>
+
+                    <!--Email-->
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Email Address</label>
+                        <div class="col-sm-9">
+                            <div>
+                                <input type="email" placeholder="Email" name="Email" class="form-control" ng-model="Email" required maxlength="100" />
+                                <span class="help-block" ng-show="errorEmail">{{errorEmail}}</span>
+                            </div>
+                            <p ng-show="StaffForm.Email.$invalid" id="help-block"> * Required</p>
+                        </div>
+                    </div>
+
+
+                <!--Password-->
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Password</label>
+                    <div class="col-sm-9">
+                        <div>
+                            <input type="password" name="Password" ng-change="passwordChange()" class="form-control" ng-model="Passwordstart" required maxlength="100" />
+                            <span class="help-block" ng-show="errorPassword">{{errorPassword}}</span>
+                        </div>
+                        <p ng-show="StaffForm.Passwordstart.$invalid" id="help-block"> * Required</p>
+                    </div>
+                </div>
+
+                    <!--Confirm Password-->
+                    <div class="form-group" ng-show="Passwordstart">
+                        <label class="col-sm-3 control-label">Confirm Password</label>
+                        <div class="col-sm-9">
+                            <div>
+                                <input type="password" name="Password" class="form-control" ng-change="passwordConfirm()" ng-model="Password" required maxlength="100" />
+                                <span class="help-block" ng-show="errorPassword">{{errorPassword}}</span>
+                            </div>
+                            <p ng-show="StaffForm.Password.$invalid" id="help-block"> * Required</p>
+                            <p ng-show="!matchPassword" id="help-block"> * Passwords do not match</p>
+                        </div>
+                    </div>
+
+                    <!--Save button -->
+                    <div class="saveButton" ng-show="Reportloader">
+                        <button type="submit" class="btn btn-primary btn-block" ng-click="RegisterSub()" ng-disabled="StaffForm.$invalid || !matchPassword">
+                            <span class="glyphicon glyphicon-floppy-disk"></span> Save
+                        </button>
+                    </div>
+                    <div class="saveButton" ng-show="!Reportloader">
+                        <button class="btn btn-primary btn-block active" style="color:black ; background:#33a6cc">
+                            <span style="position: relative; color:white; background-color:white;" us-spinner="{radius:3, width:3, length: 6}"></span>
+                        </button>                        
+                    </div>
+                    <div class="saveButton">
+                        <button type="button" class="btn btn-primary btn-block" ng-click="Back()">
+                            <span class="glyphicon glyphicon-arrow-left"></span> Back
+                        </button>
+                    </div>
+                <br />
+                <br />
+                <br />
+                <!--</div>-->
+            </div>
+
+    </form>
+  
+
+    </div>
+
+    <div ng-show="done" class="midSection">
+        <!--<p>
+            Successfully registerd you will be notified after approval
+        </p>-->
+        <!-- PAGE HEADER -->
+        <div class="page-section-header">
+            <div class="section-icon">
+                <i class="fa fa-user fa-lg"></i>
+            </div>
+            <h4 id="h5">Registration Page</h4>
+        </div>
+        <div class="innerSection">
+            <!-- USER FEEDBACK -->
+            <div class="messages" ng-model="message" ng-show="message" style="border-color:{{feedColor}}">{{message}}</div>
+
+        </div>
+        <br />
+        <br />
+        <br />
+
+
+</div>
