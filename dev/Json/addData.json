@@ -14,83 +14,263 @@
   },
   {
     "ID" : 2,
-    "Description" : "Animal"
+    "Description" : "Animal",
+    "fnCall" : "ZoonosisService.getAge().then(function (results){
+       var data = results.data;
+       $scope.sexOptions = data;
+       console.log(data);
+
+     },
+     function(results){
+       console.log(results.status);
+     });"
   },
   {
     "ID" : 3,
-    "Description" : "Area"
+    "Description" : "Area",
+    "fnCall" : "ZoonosisService.getAge().then(function (results){
+       var data = results.data;
+       $scope.sexOptions = data;
+       console.log(data);
+
+     },
+     function(results){
+       console.log(results.status);
+     });"
   },
   {
     "ID" : 4,
-    "Description" : "Box"
+    "Description" : "Box",
+    "fnCall" : "ZoonosisService.getAge().then(function (results){
+       var data = results.data;
+       $scope.sexOptions = data;
+       console.log(data);
+
+     },
+     function(results){
+       console.log(results.status);
+     });"
   },
   {
     "ID" : 5,
-    "Description" : "Cell"
+    "Description" : "Cell",
+    "fnCall" : "ZoonosisService.getAge().then(function (results){
+       var data = results.data;
+       $scope.sexOptions = data;
+       console.log(data);
+
+     },
+     function(results){
+       console.log(results.status);
+     });"
   },
   {
     "ID" : 6,
-    "Description" : "Country"
+    "Description" : "Country",
+    "fnCall" : "ZoonosisService.getAge().then(function (results){
+       var data = results.data;
+       $scope.sexOptions = data;
+       console.log(data);
+
+     },
+     function(results){
+       console.log(results.status);
+     });"
   },
   {
     "ID" : 7,
-    "Description" : "Death Voucher"
+    "Description" : "Death Voucher",
+    "fnCall" : "ZoonosisService.getAge().then(function (results){
+       var data = results.data;
+       $scope.sexOptions = data;
+       console.log(data);
+
+     },
+     function(results){
+       console.log(results.status);
+     });"
   },
   {
     "ID" : 8,
-    "Description" : "Drawer"
+    "Description" : "Drawer",
+    "fnCall" : "ZoonosisService.getAge().then(function (results){
+       var data = results.data;
+       $scope.sexOptions = data;
+       console.log(data);
+
+     },
+     function(results){
+       console.log(results.status);
+     });"
   },
   {
     "ID" : 9,
-    "Description" : "Entity"
+    "Description" : "Entity",
+    "fnCall" : "ZoonosisService.getAge().then(function (results){
+       var data = results.data;
+       $scope.sexOptions = data;
+       console.log(data);
+
+     },
+     function(results){
+       console.log(results.status);
+     });"
   },
   {
     "ID" : 10,
-    "Description" : "Entity Type"
+    "Description" : "Entity Type",
+    "fnCall" : "ZoonosisService.getAge().then(function (results){
+       var data = results.data;
+       $scope.sexOptions = data;
+       console.log(data);
+
+     },
+     function(results){
+       console.log(results.status);
+     });"
   },
   {
     "ID" : 11,
-    "Description" : "Freezer"
+    "Description" : "Freezer",
+    "fnCall" : "ZoonosisService.getAge().then(function (results){
+       var data = results.data;
+       $scope.sexOptions = data;
+       console.log(data);
+
+     },
+     function(results){
+       console.log(results.status);
+     });"
   },
   {
     "ID" : 12,
-    "Description" : "Function"
+    "Description" : "Function",
+    "fnCall" : "ZoonosisService.getAge().then(function (results){
+       var data = results.data;
+       $scope.sexOptions = data;
+       console.log(data);
+
+     },
+     function(results){
+       console.log(results.status);
+     });"
   },
   {
     "ID" : 13,
-    "Description" : "ID Method"
+    "Description" : "ID Method",
+    "fnCall" : "ZoonosisService.getAge().then(function (results){
+       var data = results.data;
+       $scope.sexOptions = data;
+       console.log(data);
+
+     },
+     function(results){
+       console.log(results.status);
+     });"
   },
   {
     "ID" : 14,
-    "Description" : "Local Region"
+    "Description" : "Local Region",
+    "fnCall" : "ZoonosisService.getAge().then(function (results){
+       var data = results.data;
+       $scope.sexOptions = data;
+       console.log(data);
+
+     },
+     function(results){
+       console.log(results.status);
+     });"
   },
   {
     "ID" : 15,
-    "Description" : "Material"
+    "Description" : "Material",
+    "fnCall" : "ZoonosisService.getAge().then(function (results){
+       var data = results.data;
+       $scope.sexOptions = data;
+       console.log(data);
+
+     },
+     function(results){
+       console.log(results.status);
+     });"
   },
   {
     "ID" : 16,
-    "Description" : "Museum"
+    "Description" : "Museum",
+    "fnCall" : "ZoonosisService.getAge().then(function (results){
+       var data = results.data;
+       $scope.sexOptions = data;
+       console.log(data);
+
+     },
+     function(results){
+       console.log(results.status);
+     });"
   },
   {
     "ID" : 17,
-    "Description" : "Museum Voucher"
+    "Description" : "Museum Voucher",
+    "fnCall" : "ZoonosisService.getAge().then(function (results){
+       var data = results.data;
+       $scope.sexOptions = data;
+       console.log(data);
+
+     },
+     function(results){
+       console.log(results.status);
+     });"
   },
   {
     "ID" : 18,
-    "Description" : "Origin"
+    "Description" : "Origin",
+    "fnCall" : "ZoonosisService.getAge().then(function (results){
+       var data = results.data;
+       $scope.sexOptions = data;
+       console.log(data);
+
+     },
+     function(results){
+       console.log(results.status);
+     });"
   },
   {
     "ID" : 19,
-    "Description" : "Photo"
+    "Description" : "Photo",
+    "fnCall" : "ZoonosisService.getAge().then(function (results){
+       var data = results.data;
+       $scope.sexOptions = data;
+       console.log(data);
+
+     },
+     function(results){
+       console.log(results.status);
+     });"
   },
   {
     "ID" : 20,
-    "Description" : "Publication"
+    "Description" : "Publication",
+    "fnCall" : "ZoonosisService.getAge().then(function (results){
+       var data = results.data;
+       $scope.sexOptions = data;
+       console.log(data);
+
+     },
+     function(results){
+       console.log(results.status);
+     });"
   },
   {
     "ID" : 21,
-    "Description" : "Region"
+    "Description" : "Region",
+    "fnCall" : "ZoonosisService.getAge().then(function (results){
+       var data = results.data;
+       $scope.sexOptions = data;
+       console.log(data);
+
+     },
+     function(results){
+       console.log(results.status);
+     });"
   },
   {
     "ID" : 22,
