@@ -50,6 +50,26 @@ zoonosisModule.controller("findingsCtrl",
                  console.log(results.status);
                });
 
+               $scope.adminOptionBoxEvents = {
+                    onItemSelect : function(item){
+                        console.log("Inside on item select");
+                        console.log(item);
+
+                    },
+                    onItemDeselect : function(item){
+                      console.log(item);
+                    },
+                    onSelectAll : function(){
+
+                    }
+
+               };
+
+               $scope.adminSelectionUpdater = function(item){
+                 
+               }
+
+
 
 
 

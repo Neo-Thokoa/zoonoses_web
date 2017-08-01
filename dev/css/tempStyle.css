@@ -27,7 +27,7 @@
     padding: 0px;
     margin: 0px;
     /*height: 96px !important;*/
-    background-color:#005bab;
+    background-color:#68831e;
 }
 
 #myNavbar a {
@@ -341,7 +341,7 @@ table
 
 th
 {
-	background-color: #005bab;
+	background-color: #68831e;
 	color: white;
 }
 
@@ -450,15 +450,16 @@ th
 }
 
 .btn-primary {
-    background: #005bab;
+    background: #68831e;
     color: #ffffff;
     height: 30px;
+    border-color: #68831e;
 }
 
     .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
-        color: #337ab7;
+        color: #68831e;
         background-color: white;
-        border-color: #337ab7;
+        border-color: #68831e;
     }
 
 .innerSection
@@ -783,6 +784,10 @@ th{
   margin-top: 7px;
   font-weight: inherit;
   text-align: center;
+}
+
+.adminIcons{
+    color: #68831e !important;
 }
 
 .animate-if.ng-enter, .animate-if.ng-leave {

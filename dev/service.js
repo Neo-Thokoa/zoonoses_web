@@ -27,30 +27,21 @@ zoonosisModule.factory('ZoonosisService', ["$http", function ($http) {
       return $http.get(path + 'host.json');
     }
 
-    factoryObj.getSpecies = function(){
-      return $http.get(path + 'species.json');
-    }
+
 
     factoryObj.getProvince = function(){
       return $http.get(path + 'province.json');
     }
 
-    factoryObj.getCountry = function(){
-      return $http.get(path + 'countries.json');
-    }
+
 
     factoryObj.getLocality = function(){
       return $http.get(path + 'localityDB.json');
     }
 
-    factoryObj.getSex = function(){
-      console.log("Inside Sex");
-      return $http.get(path + 'sexDB.json');
-    }
 
-    factoryObj.getAge = function(){
-      return $http.get(path + 'ageDB.json');
-    }
+
+
 
     factoryObj.getExistingTattoo = function()
     {
@@ -65,6 +56,126 @@ zoonosisModule.factory('ZoonosisService', ["$http", function ($http) {
     factoryObj.getDBList = function()
     {
       return $http.get(path + 'adminFunc.json');
+    }
+
+    console.log("Lets go");
+
+    factoryObj.getAge = function(){
+      return $http.get(path + 'ageDB.json');
+    }
+
+    factoryObj.getAnimal = function(){
+      return $http.get(path + 'ageDB.json');
+    }
+
+    factoryObj.getArea = function(){
+      return $http.get(path + 'ageDB.json');
+    }
+
+    factoryObj.getBox = function(){
+      return $http.get(path + 'ageDB.json');
+    }
+
+    factoryObj.getCell = function(){
+      return $http.get(path + 'ageDB.json');
+    }
+
+    factoryObj.getCountry = function(){
+      return $http.get(path + 'countries.json');
+    }
+
+    factoryObj.getDeathVoucher = function(){
+      return $http.get(path + 'countries.json');
+    }
+
+    factoryObj.getDrawer = function(){
+      return $http.get(path + 'countries.json');
+    }
+
+    factoryObj.getEntity = function(){
+      return $http.get(path + 'countries.json');
+    }
+
+    factoryObj.getEntityType = function(){
+      return $http.get(path + 'countries.json');
+    }
+
+    factoryObj.getFreezer = function(){
+      return $http.get(path + 'countries.json');
+    }
+
+    factoryObj.getFunction = function(){
+      return $http.get(path + 'countries.json');
+    }
+
+    factoryObj.getIDMethod = function(){
+      return $http.get(path + 'countries.json');
+    }
+
+    factoryObj.getLocalRegion = function(){
+      return $http.get(path + 'countries.json');
+    }
+
+    factoryObj.getMaterial = function(){
+      return $http.get(path + 'countries.json');
+    }
+
+    factoryObj.getMuseum = function(){
+      return $http.get(path + 'countries.json');
+    }
+
+    factoryObj.getMuseumVoucher = function(){
+      return $http.get(path + 'countries.json');
+    }
+
+    factoryObj.getOrigin = function(){
+      return $http.get(path + 'countries.json');
+    }
+
+    factoryObj.getPhoto = function(){
+      return $http.get(path + 'countries.json');
+    }
+
+    factoryObj.getPublication = function(){
+      return $http.get(path + 'countries.json');
+    }
+
+    factoryObj.getRegion = function(){
+      return $http.get(path + 'countries.json');
+    }
+
+    factoryObj.getRole = function(){
+      return $http.get(path + 'countries.json');
+    }
+
+    factoryObj.getSample = function(){
+      return $http.get(path + 'countries.json');
+    }
+
+    factoryObj.getSex = function(){
+      console.log("Inside Sex");
+      return $http.get(path + 'sexDB.json');
+    }
+
+    factoryObj.getSite = function(){
+      console.log("Inside Sex");
+      return $http.get(path + 'sexDB.json');
+    }
+
+    factoryObj.getSpecies = function(){
+      return $http.get(path + 'species.json');
+    }
+
+    factoryObj.getTest = function(){
+      return $http.get(path + 'species.json');
+    }
+
+    factoryObj.getTitle = function(){
+      return $http.get(path + 'species.json');
+    }
+
+    factoryObj.getUser = function(){
+      return $http.get(path + 'species.json');
     }
 
     return factoryObj;
