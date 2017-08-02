@@ -65,11 +65,12 @@ zoonosisModule.controller("findingsCtrl",
 
                };
 
-               $scope.adminSelectionUpdater = function(item){
-                 
+               $scope.adminSelectionUpdater = function(){
+                 console.log("Inside on item select");
+                 console.log($scope.dbmodel);
                }
 
-
+               $scope.message = "Manage lookup tables on this page. Select the table to manage from the various lists.";
 
 
 

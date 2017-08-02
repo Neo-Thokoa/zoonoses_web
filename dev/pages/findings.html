@@ -23,7 +23,7 @@
 
             <div class="innerSection">
                 <!-- USER FEEDBACK -->
-                <!-- <div class="messages" ng-model="message" ng-show="message" style="border-color:{{feedColor}}">{{message}}</div> -->
+                <div class="messages" ng-model="message" ng-show="message" style="border-color:{{feedColor}}">{{message}}</div>
 
                 <div ng-show="!loader" style="position: relative">
                     <div class="loading-icon">
@@ -38,6 +38,8 @@
 
                 <div ng-show="loader">
 
+
+
                   <h5 id="subHeading">Search Admin Functions</h5>
                   <!-- <div style="display:inline">
                       <nit-advanced-searchbox ng-model="searchParams"
@@ -45,16 +47,38 @@
                                               placeholder="Search..." id="searchSection">
                       </nit-advanced-searchbox>
                   </div> -->
+                  <br />
+                  <div id="Department-group" class="form-group">
+                      <div class="col-sm-9">
+                          <div>
 
-                  <div ng-dropdown-multiselect="" options="getAdminData" selected-model="dbmodel" extra-settings="example9settings" events="adminOptionBoxEvents"></div>
-                  <h5 id="subHeading">Admin Table</h5>
-                <div class="tableButtons">
+                            <oi-select oi-options="x.Description for x in getAdminData"
+                                       ng-model="dbmodel"
+                                       ng-change="adminSelectionUpdater()"
+                                       required
+                                       placeholder="Search Look up table"></oi-select>
+
+                            <span class="help-block" ng-show="errorStatus">{{errorStatus}}</span>
+                          </div>
+
+                      </div>
+                  </div>
+
+                  <!-- <div ng-dropdown-multiselect="" options="getAdminData" selected-model="dbmodel" extra-settings="example9settings" events="adminOptionBoxEvents"></div> -->
+
+
+
+
+                <div class="tableButtons" ng-if="dbmodel.length != 0">
                     <button type="button" class="btn btn-block btn-primary" ng-click="add()"><span class="glyphicon glyphicon-plus-sign"></span> Add To Database</button>
                 </div>
                 <table class="table table-hover table-bordered table-striped animate-if" style="background-color:white;" ng-if="dbmodel.length != 0">
                     <thead>
                         <tr>
-                            <th>Column</th>
+                          <th colspan="3"> {{dbmodel.Description}} </th>
+                        </tr>
+                        <tr>
+                            <th>Data</th>
                             <th>Attributes</th>
                             <!--<th>Head Collaborator</th>-->
 
@@ -63,7 +87,7 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat="v in getAdminData">
-                            <td ng-if="dbmodel.indexOf(v) >= 0">
+                            <td>
                                 {{v.Description}}
                             </td>
                             <td ng-if="dbmodel.indexOf(v) >= 0">
@@ -78,7 +102,7 @@
                             <td class="threeButtons" ng-if="dbmodel.indexOf(v) >= 0">
                                 <!--style="width:195px"-->
                                 <button type="button" class="btn btn-link spacer adminIcons" ng-click="edit(v.ID)"><span title="edit function" class="glyphicon glyphicon-pencil"></span></button>
-                                <button type="button" class="btn btn-link spacer adminIcons" ng-click="view(v.ID)"><span title="view function" class="glyphicon glyphicon-eye-open"></span></button>
+                                <!-- <button type="button" class="btn btn-link spacer adminIcons" ng-click="view(v.ID)"><span title="view function" class="glyphicon glyphicon-eye-open"></span></button> -->
                                 <button type="button" class="btn btn-link spacer adminIcons" ng-click="deleteItem(v.ID)"><span title="delete function" class="glyphicon glyphicon-trash"></span></button>
                             </td>
                         </tr>
