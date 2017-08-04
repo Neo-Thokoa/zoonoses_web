@@ -58,6 +58,10 @@ zoonosisModule.factory('ZoonosisService', ["$http", function ($http) {
       return $http.get(path + 'adminFunc.json');
     }
 
+    factoryObj.getAdminData = function(){
+      return $http.get(path + 'adminData.json');
+    }
+
     console.log("Lets go");
 
     factoryObj.getAge = function(){

@@ -86,20 +86,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="v in getAdminData">
+                        <tr ng-repeat="v in userSelection">
                             <td>
-                                {{v.Description}}
+                                {{v.value}}
                             </td>
-                            <td ng-if="dbmodel.indexOf(v) >= 0">
-                                <div ng-repeat="x in sexOptions">
-                                    <div style="display:inline">{{x.sex}}</div>: <div style="display:inline">{{x.value}}</div>
+                            <!-- <td ng-if="dbmodel.indexOf(v) >= 0"> -->
+                            <td>
+                                <div>
+                                    <div style="display:inline">{{v.Age}}</div></div>
                                 </div>
                             </td>
                             <!--<td>
                         {{x.RI_ID}}
                     </td>-->
 
-                            <td class="threeButtons" ng-if="dbmodel.indexOf(v) >= 0">
+                            <td class="threeButtons">
                                 <!--style="width:195px"-->
                                 <button type="button" class="btn btn-link spacer adminIcons" ng-click="edit(v.ID)"><span title="edit function" class="glyphicon glyphicon-pencil"></span></button>
                                 <!-- <button type="button" class="btn btn-link spacer adminIcons" ng-click="view(v.ID)"><span title="view function" class="glyphicon glyphicon-eye-open"></span></button> -->
